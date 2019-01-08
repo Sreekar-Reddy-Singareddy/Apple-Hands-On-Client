@@ -10,9 +10,9 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-
-
-
+    
+    public static var appDelegate = NSApplication.shared.delegate as! AppDelegate
+    
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
@@ -21,6 +21,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return true
+    }
+    
+    // This method handles the alerts of this view
+    func showAlert (msg: String, info: String, but1: String?, but2: String?, icon: NSImage?) -> Int {
+        var alert = NSAlert()
+        alert.messageText = msg
+        alert.informativeText = info
+        if (but1 != nil) {
+            alert.addButton(withTitle: but1!)
+        }
+        if (but2 != nil) {
+            alert.addButton(withTitle: but2!)
+        }
+        if (icon != nil) {
+            alert.icon = icon!
+        }
+        return alert.runModal().rawValue
+    }
 
 }
 

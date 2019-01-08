@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Users/bros/Desktop/SR_Hands_On/SR_Hands_On_Backend/src/java/services/Register.java</file>
+            <file>file:/Users/bros/Desktop/SR_Hands_On/SR_Hands_On_Backend/src/java/utilities/HandsOnUtils.java</file>
+            <file>file:/Users/bros/Desktop/SR_Hands_On/SR_Hands_On_Backend/src/java/server/MainServlet.java</file>
+            <file>file:/Users/bros/Desktop/SR_Hands_On/SR_Hands_On_Backend/src/java/services/Login.java</file>
+            <file>file:/Users/bros/Desktop/SR_Hands_On/SR_Hands_On_Backend/src/java/beans/Trainee.java</file>
+        </group>
     </open-files>
 </project-private>

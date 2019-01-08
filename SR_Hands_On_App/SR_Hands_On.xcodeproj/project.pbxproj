@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12C7A3E421E461570006F700 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E321E461570006F700 /* LoginController.swift */; };
+		12C7A3E621E463270006F700 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E521E463270006F700 /* RegisterController.swift */; };
+		12C7A40821E470F50006F700 /* MainServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A40721E470F50006F700 /* MainServer.swift */; };
+		12C7A40A21E471320006F700 /* ServerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A40921E471320006F700 /* ServerProtocol.swift */; };
+		12C7A40E21E4732A0006F700 /* HandsOnUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A40D21E4732A0006F700 /* HandsOnUtilities.swift */; };
 		18BE8CB721D632B8003A2C21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8CB621D632B8003A2C21 /* AppDelegate.swift */; };
 		18BE8CB921D632B8003A2C21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8CB821D632B8003A2C21 /* ViewController.swift */; };
 		18BE8CBB21D632BD003A2C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18BE8CBA21D632BD003A2C21 /* Assets.xcassets */; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12C7A3E321E461570006F700 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		12C7A3E521E463270006F700 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		12C7A40721E470F50006F700 /* MainServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServer.swift; sourceTree = "<group>"; };
+		12C7A40921E471320006F700 /* ServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerProtocol.swift; sourceTree = "<group>"; };
+		12C7A40D21E4732A0006F700 /* HandsOnUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandsOnUtilities.swift; sourceTree = "<group>"; };
 		18BE8CB321D632B8003A2C21 /* SR_Hands_On.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SR_Hands_On.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18BE8CB621D632B8003A2C21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18BE8CB821D632B8003A2C21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +44,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12C7A40B21E472B80006F700 /* Servers */ = {
+			isa = PBXGroup;
+			children = (
+				12C7A40721E470F50006F700 /* MainServer.swift */,
+				12C7A40921E471320006F700 /* ServerProtocol.swift */,
+			);
+			path = Servers;
+			sourceTree = "<group>";
+		};
+		12C7A40C21E473040006F700 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				12C7A40D21E4732A0006F700 /* HandsOnUtilities.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		18BE8CAA21D632B8003A2C21 = {
 			isa = PBXGroup;
 			children = (
@@ -53,8 +80,12 @@
 		18BE8CB521D632B8003A2C21 /* SR_Hands_On */ = {
 			isa = PBXGroup;
 			children = (
+				12C7A40C21E473040006F700 /* Utilities */,
+				12C7A40B21E472B80006F700 /* Servers */,
 				18BE8CB621D632B8003A2C21 /* AppDelegate.swift */,
 				18BE8CB821D632B8003A2C21 /* ViewController.swift */,
+				12C7A3E321E461570006F700 /* LoginController.swift */,
+				12C7A3E521E463270006F700 /* RegisterController.swift */,
 				18BE8CBA21D632BD003A2C21 /* Assets.xcassets */,
 				18BE8CBC21D632BD003A2C21 /* Main.storyboard */,
 				18BE8CBF21D632BD003A2C21 /* Info.plist */,
@@ -95,6 +126,11 @@
 				TargetAttributes = {
 					18BE8CB221D632B8003A2C21 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -133,8 +169,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12C7A40821E470F50006F700 /* MainServer.swift in Sources */,
+				12C7A3E621E463270006F700 /* RegisterController.swift in Sources */,
+				12C7A40A21E471320006F700 /* ServerProtocol.swift in Sources */,
 				18BE8CB921D632B8003A2C21 /* ViewController.swift in Sources */,
+				12C7A3E421E461570006F700 /* LoginController.swift in Sources */,
 				18BE8CB721D632B8003A2C21 /* AppDelegate.swift in Sources */,
+				12C7A40E21E4732A0006F700 /* HandsOnUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +312,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SR_Hands_On/SR_Hands_On.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SR_Hands_On/Info.plist;
@@ -289,7 +329,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SR_Hands_On/SR_Hands_On.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SR_Hands_On/Info.plist;
