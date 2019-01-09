@@ -5,6 +5,8 @@
  */
 package server;
 
+import beans.Exam;
+import beans.Trainee;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -15,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.Exammode;
 import services.Login;
 import services.Register;
 import utilities.HandsOnUtils;
@@ -57,10 +60,10 @@ public class MainServlet extends HttpServlet {
      */
     private void scanRequest (HttpServletRequest req, HttpServletResponse res) throws IOException, SQLException {
         System.out.println("Inside scanRequest method");
-        responseWriter = res.getWriter();
         serviceFlag = req.getPathInfo().substring(1);
         // Start 'Login' service
         if (serviceFlag.toLowerCase().equals(HandsOnUtils.LOGIN_SERVICE_FLAG)) {
+            responseWriter = res.getWriter();
             Login login = new Login();
             boolean loginIsValid = login.loginTrainee(parseDataStream(req.getInputStream()));
             if (loginIsValid) {
@@ -73,12 +76,40 @@ public class MainServlet extends HttpServlet {
         }
         // Start 'Register' service
         else if (serviceFlag.toLowerCase().equals(HandsOnUtils.REGISTER_SERVICE_FLAG)) {
-            // TODO: Logic to deal with register service here
+            responseWriter = res.getWriter();
             Register regiser = new Register();
             String result = regiser.registerTrainee(parseDataStream(req.getInputStream()));
             responseWriter.write(result);
             responseWriter.close();
             System.out.println("Register Result: "+result);
+        }
+        // Start 'Exam mode' service
+        else if (serviceFlag.toLowerCase().equals(HandsOnUtils.EXAM_SERVICE_FLAG)) {
+            // Create exam bean
+            Exammode exammode = new Exammode();
+            Exam exam = exammode.createExamBean(parseDataStream(req.getInputStream()));
+            
+            // Download the file
+            String result = exammode.downloadFile(exam, res); // TODO: Get these values from the request
+            if (result.equals("SUCCESS")) {
+                // TODO: Maybe you can do something here
+                return;
+            }
+            else {
+                responseWriter = res.getWriter();
+                responseWriter.write(result);
+                responseWriter.close();
+            }
+        }
+        // Fetches the trainee with given employee ID
+        else if (serviceFlag.toLowerCase().equals(HandsOnUtils.GET_TRAINEE_FLAG)) {
+            // Create exam bean // TODO: Can we have seperate service for this alone?
+            Exammode exammode = new Exammode();
+            String traineeName = exammode.getTrainee(parseDataStream(req.getInputStream()));
+            System.out.println("Trainee Name: "+traineeName);
+            responseWriter = res.getWriter();
+            responseWriter.write("Name:"+traineeName);
+            responseWriter.close();
         }
     }
     

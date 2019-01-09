@@ -76,7 +76,7 @@ class RegisterController: NSViewController, ServerProtocol {
             url: "\(HandsOnUtilities.tomcatLocation)/\(HandsOnUtilities.registerFlag)",
             data: reqData,
             httpMethod: "POST",
-            delegate: server)
+            connDelegate: server)
         server.connection.start()
     }
     
@@ -89,7 +89,6 @@ class RegisterController: NSViewController, ServerProtocol {
         
         // Use the response flag and show some alert
         if respCode != nil && respCode! == "SUCCESS" {
-            
             AppDelegate.appDelegate.showAlert(msg: "Registered Successfully", info: "Congratulations! You have been offcially registered as apple trainee", but1: "Ok", but2: nil, icon: nil)
         }
         else if respCode != nil && respCode! == "TRAINEE_EXISTS" {

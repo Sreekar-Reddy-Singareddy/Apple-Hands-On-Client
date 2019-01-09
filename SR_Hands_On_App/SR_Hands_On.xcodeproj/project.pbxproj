@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12678A8021E5B6F40045B71D /* ExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12678A7F21E5B6F40045B71D /* ExamController.swift */; };
 		12C7A3E421E461570006F700 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E321E461570006F700 /* LoginController.swift */; };
 		12C7A3E621E463270006F700 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E521E463270006F700 /* RegisterController.swift */; };
 		12C7A40821E470F50006F700 /* MainServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A40721E470F50006F700 /* MainServer.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12678A7F21E5B6F40045B71D /* ExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamController.swift; sourceTree = "<group>"; };
 		12C7A3E321E461570006F700 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		12C7A3E521E463270006F700 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		12C7A40721E470F50006F700 /* MainServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainServer.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				18BE8CB821D632B8003A2C21 /* ViewController.swift */,
 				12C7A3E321E461570006F700 /* LoginController.swift */,
 				12C7A3E521E463270006F700 /* RegisterController.swift */,
+				12678A7F21E5B6F40045B71D /* ExamController.swift */,
 				18BE8CBA21D632BD003A2C21 /* Assets.xcassets */,
 				18BE8CBC21D632BD003A2C21 /* Main.storyboard */,
 				18BE8CBF21D632BD003A2C21 /* Info.plist */,
@@ -175,6 +178,7 @@
 				18BE8CB921D632B8003A2C21 /* ViewController.swift in Sources */,
 				12C7A3E421E461570006F700 /* LoginController.swift in Sources */,
 				18BE8CB721D632B8003A2C21 /* AppDelegate.swift in Sources */,
+				12678A8021E5B6F40045B71D /* ExamController.swift in Sources */,
 				12C7A40E21E4732A0006F700 /* HandsOnUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

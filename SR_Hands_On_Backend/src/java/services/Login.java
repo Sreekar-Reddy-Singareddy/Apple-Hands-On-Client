@@ -5,6 +5,7 @@
  */
 package services;
 
+import beans.Exam;
 import beans.Trainee;
 import com.google.gson.Gson;
 import java.sql.Connection;
@@ -20,7 +21,7 @@ import utilities.HandsOnUtils;
 public class Login {
     
     private Connection conn;
-    
+
     /**
      * Gets the trainee's details and verify them.
      * Returns true if valid trainee, else false.
@@ -29,11 +30,14 @@ public class Login {
         System.out.println("Inside loginTrainee method");
         Gson gson = HandsOnUtils.getGson();
         Trainee trainee = (Trainee) gson.fromJson(traineeJson, Trainee.class);
+        Exam exam = (Exam) gson.fromJson(traineeJson, Exam.class);
         System.out.println("Trainee ID: "+trainee.getEmpId());
+        System.out.println("Exam Code : "+exam.getExamCode());
         
         conn = HandsOnUtils.getMySQLConnection();
-        PreparedStatement statement = conn.prepareStatement("SELECT EMP_ID FROM TRAINEES_DATA WHERE EMP_ID = ?");
-        statement.setLong(1, trainee.getEmpId());
+        PreparedStatement statement = conn.prepareStatement("SELECT EXAM_CODE FROM EXAM_DATA WHERE EXAM_CODE = ? AND EXISTS (SELECT EMP_ID FROM TRAINEES_DATA WHERE EMP_ID = ?)");
+        statement.setLong(1, exam.getExamCode());
+        statement.setLong(2, trainee.getEmpId());
         ResultSet result = statement.executeQuery();
         while (result.next()) {
             // Trainee exists if control comes inside this block

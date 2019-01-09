@@ -19,11 +19,18 @@ import java.util.logging.Logger;
 public class HandsOnUtils {
     
     private static Gson GSON_GLOBAL;
+    /**
+     * This is a singleton connection object which will be created only once
+     * through out the application and this can be accessed by calling getMySQLConnection()
+     * from any where in the application.
+     */
     private static Connection CONN;
     
     // Service flag strings
     public static String LOGIN_SERVICE_FLAG = "login";
     public static String REGISTER_SERVICE_FLAG = "register";
+    public static String EXAM_SERVICE_FLAG = "exammode";
+    public static String GET_TRAINEE_FLAG = "trainee";
     
     // Response code strings
     public static String VALID = "VALID";
@@ -32,6 +39,9 @@ public class HandsOnUtils {
     // File related variables
     public static String BASE_PATH = "/Users/bros/Desktop/";
     public static String TRAINEES_LIST_PATH = "trainees.txt";
+    public static String QPR_FILE = "QPR";
+    public static String INS_FILE = "INS";
+    public static String SUP_FILE = "SUP";
     
     // MySQL credentials
     private static String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
