@@ -19,13 +19,14 @@ class ExamController: NSViewController, ServerProtocol {
     
     @IBOutlet weak var pdfViewer: PDFView!
     @IBOutlet weak var pdfViewPop: NSPopUpButton!
-    @IBOutlet weak var submitButton: NSButton!
+    @IBOutlet weak var nextButton: NSButton!
     @IBOutlet weak var traineeName: NSTextField!
     @IBOutlet weak var examTime: NSTextField!
     @IBOutlet weak var startButton: NSButton!
     @IBOutlet weak var startLabel: NSTextField!
     @IBOutlet weak var thumbs: PDFThumbnailView!
     @IBOutlet weak var downloadButton: NSButton!
+    @IBOutlet weak var submitButton: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class ExamController: NSViewController, ServerProtocol {
     }
     
     override func viewDidAppear() {
+        print("Exam: \(self)")
+        print("Exam Window: \(self.view.window)")
         // Fetch the trainee's details for welcome label
         var dict = NSMutableDictionary()
         dict.setValue(empId, forKey: "empId")
@@ -58,34 +61,25 @@ class ExamController: NSViewController, ServerProtocol {
         }
     }
     
-    // This method fetched the main assessment file
-    @IBAction func submit(_ sender: NSButton) {
-        
-        if sender.image?.name() == "next" {
-            sender.image = NSImage.init(named: NSImage.Name("upload"))
-            downloadButton.isHidden = false
-            // Set the file type as 'Quesion Paper'
-            fileType = HandsOnUtilities.qprCode
-            
-            // Download the question paper
-            var reqData = createExamInfo(fileType: fileType) // TODO: Handle this nil
-            server.delegate = self
-            server.connection = HandsOnUtilities.getConnectionObj(
-                url: "\(HandsOnUtilities.tomcatLocation)/\(HandsOnUtilities.exammodeFlag)",
-                data: reqData,
-                httpMethod: "POST",
-                connDelegate: server)
-            server.connection.start()
-        }
-        else {
-            var code = AppDelegate.appDelegate.showAlert(msg: "Confirm Submission", info: "You are about to submit your assessment. Are you sure?", but1: "Yes", but2: "No", icon: NSImage.init(named: NSImage.Name("question")))
-            // TODO: Handle the file upload logic here
-            print("Submitted!")
-        }
+    @IBAction func logout(_ sender: NSButton) {
+        self.view.window?.close()
     }
     
-    @IBAction func logout(_ sender: NSButton) {
+    // This method fetched the main assessment file
+    @IBAction func next(_ sender: NSButton) {
+        downloadButton.isHidden = false
+        // Set the file type as 'Quesion Paper'
+        fileType = HandsOnUtilities.qprCode
         
+        // Download the question paper
+        var reqData = createExamInfo(fileType: fileType) // TODO: Handle this nil
+        server.delegate = self
+        server.connection = HandsOnUtilities.getConnectionObj(
+            url: "\(HandsOnUtilities.tomcatLocation)/\(HandsOnUtilities.exammodeFlag)",
+            data: reqData,
+            httpMethod: "POST",
+            connDelegate: server)
+        server.connection.start()
     }
 
     // This method downloads the suppliedfiles.zip, if any
@@ -123,6 +117,11 @@ class ExamController: NSViewController, ServerProtocol {
         
     }
     
+    // Before presenting the sheet
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        (segue.destinationController as! SubmitController).mainParentWindow = self.view.window
+    }
+    
     // Creates dictionary of exam information details
     func createExamInfo(fileType: String) -> Data? {
         // Data containing the examcode and file types
@@ -140,6 +139,7 @@ class ExamController: NSViewController, ServerProtocol {
         pdfViewer.isHidden = !examView
         thumbs.isHidden = !examView
         pdfViewPop.isHidden = !examView
+        nextButton.isHidden = !examView
         submitButton.isHidden = !examView
         examTime.isHidden = !examView
     }
@@ -172,13 +172,12 @@ class ExamController: NSViewController, ServerProtocol {
             pdfViewer.document = pdfDoc!
             // Change the button icon based on the file downloaded
             if (fileType == HandsOnUtilities.insCode) {
-                submitButton.image = NSImage.init(named: NSImage.Name("next"))
+                nextButton.isHidden = false
+                submitButton.isHidden = true
             }
-            else if fileType == HandsOnUtilities.qprCode {
-                submitButton.image = NSImage.init(named: NSImage.Name("upload"))
-            }
-            else if fileType == HandsOnUtilities.supCode {
-                submitButton.image = NSImage.init(named: NSImage.Name("upload"))
+            else if fileType == HandsOnUtilities.qprCode || fileType == HandsOnUtilities.supCode {
+                nextButton.isHidden = true
+                submitButton.isHidden = false
             }
             return
         }

@@ -10,7 +10,7 @@ import Foundation
 
 class HandsOnUtilities: NSObject {
     
-    public static var tomcatIpAdd = "127.0.0.1"
+    public static var tomcatIpAdd = "192.168.43.103"
     public static var tomcatPort = "8080"
     public static var tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/srhandson/"
     
@@ -18,17 +18,27 @@ class HandsOnUtilities: NSObject {
     public static var registerFlag = "register"
     public static var exammodeFlag = "exammode"
     public static var traineeFlag = "trainee"
+    public static var submitFlag = "submit"
     
     public static var insCode = "INS"
     public static var qprCode = "QPR"
     public static var supCode = "SUP"
     
+    public static var baseFilePath = "/Users/bros/Desktop/"
+    
     // Single object of main server
     private static var mainServer = MainServer()
+    
+    // Single object of main file manager
+    private static var mainFileManager = FileManager.default
     
     
     static func getMainServer () -> MainServer{
         return mainServer
+    }
+    
+    static func getFileManager() -> FileManager {
+        return mainFileManager
     }
     
     // This method creates a connection object and returns it

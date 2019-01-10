@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import services.Exammode;
 import services.Login;
 import services.Register;
+import services.SubmitFile;
 import utilities.HandsOnUtils;
 
 /**
@@ -60,7 +61,8 @@ public class MainServlet extends HttpServlet {
      */
     private void scanRequest (HttpServletRequest req, HttpServletResponse res) throws IOException, SQLException {
         System.out.println("Inside scanRequest method");
-        serviceFlag = req.getPathInfo().substring(1);
+        String [] urlParts = req.getPathInfo().split("/");
+        serviceFlag = urlParts[1];
         // Start 'Login' service
         if (serviceFlag.toLowerCase().equals(HandsOnUtils.LOGIN_SERVICE_FLAG)) {
             responseWriter = res.getWriter();
@@ -110,6 +112,24 @@ public class MainServlet extends HttpServlet {
             responseWriter = res.getWriter();
             responseWriter.write("Name:"+traineeName);
             responseWriter.close();
+        }
+        // Starts the file submission service
+        else if (serviceFlag.toLowerCase().equals(HandsOnUtils.SUBMIT_FILE_FLAG)) {
+            // Name of the file
+            String fileName = urlParts[2];
+            SubmitFile submitService = new SubmitFile();
+            boolean downloaded = submitService.submitFile(fileName, req.getInputStream());
+            responseWriter = res.getWriter();
+            if (downloaded) {
+                // File successfully downloaded
+                responseWriter.write("SUCCESS");
+                responseWriter.close();
+            }
+            else {
+                // File successfully downloaded
+                responseWriter.write("FAILURE");
+                responseWriter.close();
+            }
         }
     }
     

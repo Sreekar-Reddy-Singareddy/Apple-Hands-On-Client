@@ -54,7 +54,7 @@ class RegisterController: NSViewController, ServerProtocol {
         // Create a dictionary for the trainee
         var traineeDict = NSMutableDictionary()
         traineeDict.setValue(empId, forKey: "empId")
-        traineeDict.setValue("127.0.0.2", forKey: "ipAdd")
+        traineeDict.setValue("127.0.0.2", forKey: "ip_address")
         traineeDict.setValue(fName, forKey: "firstName")
         traineeDict.setValue(lName, forKey: "lastName")
         traineeDict.setValue(emailId, forKey: "emailId")

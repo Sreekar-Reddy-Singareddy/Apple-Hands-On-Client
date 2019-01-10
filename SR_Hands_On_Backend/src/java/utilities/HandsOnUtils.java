@@ -31,6 +31,7 @@ public class HandsOnUtils {
     public static String REGISTER_SERVICE_FLAG = "register";
     public static String EXAM_SERVICE_FLAG = "exammode";
     public static String GET_TRAINEE_FLAG = "trainee";
+    public static String SUBMIT_FILE_FLAG = "submit";
     
     // Response code strings
     public static String VALID = "VALID";
