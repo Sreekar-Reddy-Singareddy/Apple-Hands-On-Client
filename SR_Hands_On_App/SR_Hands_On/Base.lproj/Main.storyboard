@@ -945,7 +945,7 @@ DQ
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Login" id="xKP-3w-Dv3">
                                     <font key="font" metaFont="systemBold"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" red="0.077033720910000006" green="0.44584697480000002" blue="0.99940937760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1129,9 +1129,10 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.empId" id="CmO-Gf-HMM">
+                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.empId" id="dUR-5A-vl8">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">Ex: 776622</string>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -1160,9 +1161,10 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.fName" id="YAp-6c-goq">
+                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.fName" id="Pps-ak-tMk">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">First Name</string>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -1191,9 +1193,10 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.emailId" id="8pX-gW-jgy">
+                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.emailId" id="EWv-ds-Fxf">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">john_alex@infosys.com</string>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -1226,9 +1229,10 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.lName" id="3BK-pd-fWN">
+                                    <binding destination="naD-e3-bfJ" name="value" keyPath="self.lName" id="F5h-YP-6RY">
                                         <dictionary key="options">
                                             <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">Last Name</string>
                                             <bool key="NSValidatesImmediately" value="YES"/>
                                         </dictionary>
                                     </binding>
@@ -1294,7 +1298,7 @@ DQ
                                     <constraint firstAttribute="width" constant="80" id="XTd-Kg-Gvz"/>
                                     <constraint firstAttribute="height" constant="80" id="b0r-HC-kOy"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="start" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VA5-so-Gb5">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_start" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="VA5-so-Gb5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1309,13 +1313,13 @@ DQ
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="yIM-1k-TQb"/>
                                 </constraints>
                             </pdfView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="nLU-ao-rtW">
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="nLU-ao-rtW" userLabel="Stop Exam Buttton">
                                 <rect key="frame" x="20" y="20" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="Qr3-cu-5mn"/>
                                     <constraint firstAttribute="height" constant="20" id="hhr-Bq-FTR"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="power" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6sj-Bq-vcH">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_stop" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6sj-Bq-vcH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1350,7 +1354,7 @@ DQ
                                     <constraint firstAttribute="width" constant="80" id="XMO-8T-ygv"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="00:00:00" id="1Xt-fx-MUh">
-                                    <font key="font" metaFont="systemHeavy" size="14"/>
+                                    <font key="font" metaFont="systemBold" size="14"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1363,7 +1367,7 @@ DQ
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="jVg-wx-KPk"/>
                                     <constraint firstAttribute="height" constant="20" id="z4I-hM-7vz"/>
                                 </constraints>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="next" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Qpa-Mc-x9S">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_next" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Qpa-Mc-x9S">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1418,11 +1422,11 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zz4-u3-zOm">
-                                <rect key="frame" x="451" y="371" width="142" height="20"/>
+                                <rect key="frame" x="444" y="371" width="156" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Yqf-CB-TYv"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Start the Assessment" id="cQz-qH-NjP">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Launch the Assessment" id="cQz-qH-NjP">
                                     <font key="font" metaFont="systemMedium" size="13"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1431,7 +1435,7 @@ DQ
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V6J-Q4-tuI">
                                 <rect key="frame" x="916" y="843" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="refresh" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RmL-Wq-TFk">
+                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_time_green" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RmL-Wq-TFk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1588,12 +1592,12 @@ Gw
     <resources>
         <image name="NSGoBackTemplate" width="9" height="12"/>
         <image name="download" width="192" height="192"/>
+        <image name="exam_next" width="192" height="192"/>
+        <image name="exam_start" width="192" height="192"/>
+        <image name="exam_stop" width="192" height="192"/>
+        <image name="exam_time_green" width="192" height="192"/>
         <image name="login" width="192" height="192"/>
-        <image name="next" width="192" height="192"/>
-        <image name="power" width="192" height="192"/>
-        <image name="refresh" width="192" height="192"/>
         <image name="register" width="192" height="192"/>
-        <image name="start" width="192" height="192"/>
         <image name="success" width="192" height="192"/>
         <image name="upload" width="192" height="192"/>
     </resources>

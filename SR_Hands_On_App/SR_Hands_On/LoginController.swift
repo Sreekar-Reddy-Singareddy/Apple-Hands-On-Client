@@ -33,16 +33,16 @@ class LoginController: NSViewController, ServerProtocol {
         do {
             // Check for the empty or nil
             if empId == nil || empId! == 0 {
-                AppDelegate.appDelegate.showAlert(msg: "Employee ID Empty", info: "Please enter your employee in order to login", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("missing")))
+                AppDelegate.appDelegate.showAlert(msg: "Employee ID Empty", info: "Please enter your employee ID in order to login", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("missing_field")))
                 return
             }
             if examCode == nil || examCode.isEmpty {
-                AppDelegate.appDelegate.showAlert(msg: "Exam Code Empty", info: "Please enter the exam code to authenticate and take assessment", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("missing")))
+                AppDelegate.appDelegate.showAlert(msg: "Exam Code Empty", info: "Please enter the exam code to authenticate and take the assessment", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("missing_field")))
                 return
             }
             examCodeNum = Int(examCode)
             if examCode.count != 8 || examCodeNum == nil {
-                AppDelegate.appDelegate.showAlert(msg: "Incorrect Code Format", info: "Please enter the correct format exam code to proceed. Code must contain only 8 digits", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+                AppDelegate.appDelegate.showAlert(msg: "Incorrect Code Format", info: "Please enter the correct format exam code to proceed. Code must contain only 8 digits", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
                 examCode = nil
                 return
             }
@@ -84,16 +84,16 @@ class LoginController: NSViewController, ServerProtocol {
             examController.empId = empId // TODO: Remove them
         }
         else if respCode != nil && respCode! == "NO_EXAM_TODAY" {
-            var code = AppDelegate.appDelegate.showAlert(msg: "Login Failed", info: "There are no assessments scheduled at this time, for the given code", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Login Failed", info: "There are no assessments scheduled at this time, for the given code", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
             examCode = nil
         }
         else if respCode != nil && respCode! == "EXAM_FINISHED" {
-            var code = AppDelegate.appDelegate.showAlert(msg: "Assessment Ended", info: "Your assessment has already ended. You cannot retake or resubmit the assessment", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Assessment Ended", info: "Your assessment has already ended. You cannot retake or resubmit the assessment", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
             examCode = nil
             self.view.window?.close()
         }
         else if respCode != nil && respCode! == "NO_TRAINEE" {
-            var code = AppDelegate.appDelegate.showAlert(msg: "Login Failed", info: "You are not a registered apple trainee yet. Please register to take the assessment", but1: "Register", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("cancel")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Login Failed", info: "You are not a registered apple trainee yet. Please register to take the assessment", but1: "Register", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("red_alert")))
             print("Code: \(code)")
             if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                 let registerController = story.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("RegisterVC")) as! RegisterController

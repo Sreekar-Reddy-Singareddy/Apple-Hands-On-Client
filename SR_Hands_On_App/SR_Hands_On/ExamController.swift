@@ -174,19 +174,19 @@ class ExamController: NSViewController, ServerProtocol {
             self.view.window?.close()
         }
         else if Int.init(timeLeft) == 60 {
-            AppDelegate.appDelegate.showAlert(msg: "15 Minutes More", info: "You have less than 15 minutes left. App will quit automatically after that", but1: "Noted", but2: nil, icon: nil)
+            AppDelegate.appDelegate.showAlert(msg: "15 Minutes More", info: "You have less than 15 minutes left. App will quit automatically after that", but1: "Noted", but2: nil, icon: NSImage.init(named: "exam_time_red"))
         }
         else if timeLeft > 0 && timeLeft < 60 {
             // Change the image to RED
-            timerIcon.image = NSImage.init(named: "r_timer")
+            timerIcon.image = NSImage.init(named: "exam_time_red")
         }
         else if timeLeft > 60 && timeLeft <= 120 {
             // Change the image to ORANGE
-            timerIcon.image = NSImage.init(named: "o_timer")
+            timerIcon.image = NSImage.init(named: "exam_time_org")
         }
         else if timeLeft > 120 {
             // Change the image to GREEN
-            timerIcon.image = NSImage.init(named: "g_timer")
+            timerIcon.image = NSImage.init(named: "exam_time_green")
         }
         timeCompFormatter = DateComponentsFormatter.init()
         timeCompFormatter.allowedUnits = [.hour, .minute, .second]
@@ -247,13 +247,13 @@ class ExamController: NSViewController, ServerProtocol {
         // Checking if any errors have occured
         var errorCode = String.init(data: data, encoding: .ascii)
         if (errorCode != nil && errorCode == "INVALID_EXAMCODE") {
-            AppDelegate.appDelegate.showAlert(msg: "Invalid Examcode", info: "Please enter a valid exam code in order to take the assessment.", but1: "Ok", but2: nil, icon: nil)
+            AppDelegate.appDelegate.showAlert(msg: "Invalid Examcode", info: "Please enter a valid exam code in order to take the assessment.", but1: "Ok", but2: nil, icon: NSImage.init(named: "red_alert"))
             return
         }
         else if (errorCode != nil && errorCode == "NO_SUPPLIED_FILES") {
             // If there are no supplied files provided for this assessment,
             // there wouldn't be any downloadables. Works mostly for FA2, FA3 & FA4
-            AppDelegate.appDelegate.showAlert(msg: "No Downloadables", info: "This assessment does not provide any supplied code. You must create new project in Xcode to work", but1: "Ok", but2: nil, icon: nil)
+            AppDelegate.appDelegate.showAlert(msg: "No Downloadables", info: "This assessment does not provide any supplied code. You must create new project in Xcode to work", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_file"))
             return
         }
         else if (errorCode != nil && errorCode == "INVALID_EXAM_DETAILS") {
@@ -261,7 +261,7 @@ class ExamController: NSViewController, ServerProtocol {
             // 1. Exam code could be invalid
             // 2. Exam date could be invalid
             // 3. Even if above two are valid, the time limit could be invalid
-            AppDelegate.appDelegate.showAlert(msg: "No Assessment Present", info: "There is no assessment scheduled currently. Check whether the exam date and time are correct", but1: "Ok", but2: nil, icon: nil)
+            AppDelegate.appDelegate.showAlert(msg: "No Assessment Present", info: "There is no assessment scheduled currently. Check whether the exam date and time are correct", but1: "Ok", but2: nil, icon: NSImage.init(named: "red_alert"))
             
         }
         else if (errorCode != nil && errorCode!.starts(with: "Name:")) {
@@ -309,7 +309,7 @@ class ExamController: NSViewController, ServerProtocol {
                 return
             }
             else {
-                AppDelegate.appDelegate.showAlert(msg: "Failed to Download", info: "Your supplied code files could not be downloaded. Kindly check with your invigilator", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+                AppDelegate.appDelegate.showAlert(msg: "Failed to Download", info: "Your supplied code files could not be downloaded. Kindly check with your invigilator", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
                 return
             }
         }

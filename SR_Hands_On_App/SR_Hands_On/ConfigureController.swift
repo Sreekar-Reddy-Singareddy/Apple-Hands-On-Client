@@ -56,7 +56,7 @@ class ConfigureController: NSViewController, ServerProtocol {
         }
         else {
             statusLabel.stringValue = "Connection Failed"
-            connectionStatus.image = NSImage.init(named: "cancel")
+            connectionStatus.image = NSImage.init(named: "red_alert")
         }
         statusLabel.isHidden = false
         connectionStatus.isHidden = false

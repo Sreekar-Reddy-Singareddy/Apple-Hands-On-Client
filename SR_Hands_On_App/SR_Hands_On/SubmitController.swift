@@ -38,7 +38,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         var fullFilePath = HandsOnUtilities.baseFilePath + self.fileName
         if fMan.fileExists(atPath: fullFilePath) {
             // File exists, so proceed to submit it
-            var code = AppDelegate.appDelegate.showAlert(msg: "Confirm Submission", info: "Are you sure you want to submit \(self.fileName!)? Once submitted, you cannot do undo it", but1: "Confirm", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("confirm")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Confirm Submission", info: "Are you sure you want to submit \(self.fileName!)? Once submitted, you cannot do undo it", but1: "Confirm", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("confirm_action")))
             if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                 // TODO: Logic to upload the file to the server
                 uploadFile(fullFilePath: fullFilePath)
@@ -48,7 +48,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         }
         else {
             // File does not exist, ask user to check the name
-            AppDelegate.appDelegate.showAlert(msg: "File Not Found", info: "Unable to find \(self.fileName!) on Desktop. Please make sure your file name is correct and is present on Desktop", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+            AppDelegate.appDelegate.showAlert(msg: "File Not Found", info: "Unable to find \(self.fileName!) on Desktop. Please make sure your file name is correct and is present on Desktop", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("missing_file")))
         }
     }
     
@@ -58,7 +58,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         // Convert the file into data
         var fileData = fMan.contents(atPath: fullFilePath)
         if fileData == nil {
-            AppDelegate.appDelegate.showAlert(msg: "Upload Failed", info: "Please try again", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+            AppDelegate.appDelegate.showAlert(msg: "Upload Failed", info: "Please try again", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
             return
         }
         
@@ -118,7 +118,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
             }
         }
         else if code == "FAILURE" {
-            AppDelegate.appDelegate.showAlert(msg: "Uploaded Failed", info: "\(self.fileName!) could not be uploaded due to technical issues. Kindly contact your invigilator for assistance", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+            AppDelegate.appDelegate.showAlert(msg: "Uploaded Failed", info: "\(self.fileName!) could not be uploaded due to technical issues. Kindly contact your invigilator for assistance", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
         }
         else if code == "UPDATE_SUCCESS" {
             print("Updated Successfully")
