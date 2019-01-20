@@ -18,6 +18,7 @@
 		18BE8CB921D632B8003A2C21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE8CB821D632B8003A2C21 /* ViewController.swift */; };
 		18BE8CBB21D632BD003A2C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18BE8CBA21D632BD003A2C21 /* Assets.xcassets */; };
 		18BE8CBE21D632BD003A2C21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18BE8CBC21D632BD003A2C21 /* Main.storyboard */; };
+		C6DA4D0D21F1A6C400A68CBB /* ConfigureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA4D0C21F1A6C400A68CBB /* ConfigureController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		18BE8CBD21D632BD003A2C21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18BE8CBF21D632BD003A2C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18BE8CC021D632BD003A2C21 /* SR_Hands_On.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SR_Hands_On.entitlements; sourceTree = "<group>"; };
+		C6DA4D0C21F1A6C400A68CBB /* ConfigureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				12C7A40C21E473040006F700 /* Utilities */,
 				12C7A40B21E472B80006F700 /* Servers */,
 				18BE8CB621D632B8003A2C21 /* AppDelegate.swift */,
+				C6DA4D0C21F1A6C400A68CBB /* ConfigureController.swift */,
 				18BE8CB821D632B8003A2C21 /* ViewController.swift */,
 				12C7A3E321E461570006F700 /* LoginController.swift */,
 				12C7A3E521E463270006F700 /* RegisterController.swift */,
@@ -175,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6DA4D0D21F1A6C400A68CBB /* ConfigureController.swift in Sources */,
 				120879BE21E6F96B00A57F48 /* SubmitController.swift in Sources */,
 				12C7A40821E470F50006F700 /* MainServer.swift in Sources */,
 				12C7A3E621E463270006F700 /* RegisterController.swift in Sources */,

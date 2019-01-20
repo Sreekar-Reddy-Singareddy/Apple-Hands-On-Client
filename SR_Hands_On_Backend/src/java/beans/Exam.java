@@ -5,6 +5,8 @@
  */
 package beans;
 
+import java.util.Date;
+
 /**
  *
  * @author bros
@@ -13,6 +15,9 @@ public class Exam {
     
     private long examCode = 0l;
     private String fileType = "";
+    private Date examDate;
+    private Date startTime;
+    private Date endTime;
 
     public Exam() {
         
@@ -33,7 +38,28 @@ public class Exam {
     public void setFileType(String fileType) {
         this.fileType = fileType;
     }
-    
-    
-    
+
+    public Date getExamDate() {
+        return examDate;
+    }
+
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 }

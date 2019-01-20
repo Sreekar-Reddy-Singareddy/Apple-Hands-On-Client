@@ -54,7 +54,7 @@ class RegisterController: NSViewController, ServerProtocol {
         // Create a dictionary for the trainee
         var traineeDict = NSMutableDictionary()
         traineeDict.setValue(empId, forKey: "empId")
-        traineeDict.setValue("127.0.0.2", forKey: "ip_address")
+        traineeDict.setValue(HandsOnUtilities.getIFAddresses()[1], forKey: "ip_address")
         traineeDict.setValue(fName, forKey: "firstName")
         traineeDict.setValue(lName, forKey: "lastName")
         traineeDict.setValue(emailId, forKey: "emailId")
@@ -80,22 +80,33 @@ class RegisterController: NSViewController, ServerProtocol {
         server.connection.start()
     }
     
+    func redirectToLogin () {
+        var loginVc = story.instantiateController(withIdentifier: "LoginVC") as! LoginController
+        self.view.window?.contentViewController = loginVc
+        loginVc.empId = self.empId
+    }
     
-    
-    func responseCompletedWithData(data: Data) {
+    func plainTextCodeReceived(data: Data) {
         print("Response recieved from register service")
         print("Response: \(String.init(data: data, encoding: .ascii))")
         var respCode = String.init(data: data, encoding: .ascii)
         
         // Use the response flag and show some alert
         if respCode != nil && respCode! == "SUCCESS" {
-            AppDelegate.appDelegate.showAlert(msg: "Registered Successfully", info: "Congratulations! You have been offcially registered as apple trainee", but1: "Ok", but2: nil, icon: nil)
+            _ = AppDelegate.appDelegate.showAlert(msg: "Registered Successfully", info: "Congratulations! You have been offcially registered as apple trainee", but1: "Ok", but2: nil, icon: nil)
+            redirectToLogin()
         }
         else if respCode != nil && respCode! == "TRAINEE_EXISTS" {
-            AppDelegate.appDelegate.showAlert(msg: "Trainee Already Exists", info: "Trainee with this employee number is already registered with us", but1: "Ok", but2: nil, icon: nil)
+            let code = AppDelegate.appDelegate.showAlert(msg: "Trainee Already Exists", info: "Trainee with this employee number is already registered with us", but1: "Login", but2: nil, icon: nil)
+            if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
+                // Take the user to the login window
+                redirectToLogin()
+            }
+            
         }
         else if respCode != nil && respCode! == "INVALID_EMPID" {
             AppDelegate.appDelegate.showAlert(msg: "Invalid EmpID", info: "This employee id is not authorised to register as apple trainee", but1: "Ok", but2: nil, icon: nil)
+            empId = nil
         }
         else if respCode != nil && respCode! == "INVALID_NAME" {
             AppDelegate.appDelegate.showAlert(msg: "Invalid Name", info: "Please check your first and last name for any invalid characters and try again", but1: "Ok", but2: nil, icon: nil)

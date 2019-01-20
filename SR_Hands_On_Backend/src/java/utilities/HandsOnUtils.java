@@ -32,13 +32,16 @@ public class HandsOnUtils {
     public static String EXAM_SERVICE_FLAG = "exammode";
     public static String GET_TRAINEE_FLAG = "trainee";
     public static String SUBMIT_FILE_FLAG = "submit";
+    public static String REFRESH_TIME = "refresh_time";
+    public static String TEST_CONN_FLAG = "test";
+    public static String UPDATE_SUBMISSION_FLAG = "submit_update";
     
     // Response code strings
     public static String VALID = "VALID";
     public static String INVALID = "INVALID";
     
     // File related variables
-    public static String BASE_PATH = "/Users/bros/Desktop/";
+    public static String BASE_PATH = "/Users/sreekar/Desktop/";
     public static String TRAINEES_LIST_PATH = "trainees.txt";
     public static String QPR_FILE = "QPR";
     public static String INS_FILE = "INS";

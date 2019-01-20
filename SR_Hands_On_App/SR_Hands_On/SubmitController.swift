@@ -18,6 +18,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
     
     var fMan = HandsOnUtilities.getFileManager()
     var mainParentWindow: NSWindow!
+    var server = HandsOnUtilities.getMainServer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         }
         
         // Connect and send the data to sevrer
-        var server = HandsOnUtilities.getMainServer()
+        
         server.delegate = self
         server.connection = HandsOnUtilities.getConnectionObj(
             url: "\(HandsOnUtilities.tomcatLocation)/\(HandsOnUtilities.submitFlag)/\(self.fileName!)",
@@ -92,11 +93,22 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         checkFileButton.isEnabled = false
     }
     
-    func responseCompletedWithData(data: Data) {
+    func plainTextCodeReceived(data: Data) {
         // This response contains nil, SUCCESS or FAILURE
         var code = String.init(data: data, encoding: .ascii)
-        
         if code == "SUCCESS" {
+            // Update the submission column in database
+            var reqDict = NSMutableDictionary.init()
+            reqDict.setValue(HandsOnUtilities.empId, forKey: "empId")
+            reqDict.setValue(HandsOnUtilities.examCode, forKey: "examCode")
+            var reqData = HandsOnUtilities.getDataFromDict(dataDict: reqDict)
+            server.connection = HandsOnUtilities.getConnectionObj(
+                url: "\(HandsOnUtilities.tomcatLocation)submit_update",
+                data: reqData,
+                httpMethod: "POST", connDelegate: server)
+            server.connection.start()
+            
+            // Alert the user about the submission
             var code = AppDelegate.appDelegate.showAlert(msg: "Uploaded Success", info: "\(self.fileName!) was uploaded successfully. You can now quit the application", but1: "Quit", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
             if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                 // Quit the application
@@ -107,6 +119,12 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
         }
         else if code == "FAILURE" {
             AppDelegate.appDelegate.showAlert(msg: "Uploaded Failed", info: "\(self.fileName!) could not be uploaded due to technical issues. Kindly contact your invigilator for assistance", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
+        }
+        else if code == "UPDATE_SUCCESS" {
+            print("Updated Successfully")
+        }
+        else if code == "UPDATE_FAILED" {
+            print("Update Failed")
         }
     }
     

@@ -14,6 +14,11 @@ class ExamController: NSViewController, ServerProtocol {
     var fileType:String!
     var examCode:Int!
     var empId: NSNumber!
+    var endsAt: Date!
+    var startedAt: Date!
+    var timeLeft: TimeInterval!
+    var timer: Timer!
+    var timeCompFormatter: DateComponentsFormatter!
     
     let server = HandsOnUtilities.getMainServer()
     
@@ -27,6 +32,7 @@ class ExamController: NSViewController, ServerProtocol {
     @IBOutlet weak var thumbs: PDFThumbnailView!
     @IBOutlet weak var downloadButton: NSButton!
     @IBOutlet weak var submitButton: NSButton!
+    @IBOutlet weak var timerIcon: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +71,13 @@ class ExamController: NSViewController, ServerProtocol {
         self.view.window?.close()
     }
     
+    @IBAction func refreshTime(_ sender: NSButton) {
+        refreshTime()
+    }
+    
     // This method fetched the main assessment file
     @IBAction func next(_ sender: NSButton) {
+        print("Inside next method")
         downloadButton.isHidden = false
         // Set the file type as 'Quesion Paper'
         fileType = HandsOnUtilities.qprCode
@@ -100,6 +111,7 @@ class ExamController: NSViewController, ServerProtocol {
     
     // This method starts the exam by displaying instructions and then QP
     @IBAction func start(_ sender: NSButton) {
+        print("Inside start method")
         setView(examView: true)
         // Set the file type as 'Instructions'
         fileType = HandsOnUtilities.insCode
@@ -128,7 +140,60 @@ class ExamController: NSViewController, ServerProtocol {
         var dataDict = NSMutableDictionary()
         dataDict.setValue(examCode, forKey: "examCode") // TODO: Exam code get some where dynamically
         dataDict.setValue(fileType, forKey: "fileType")
+        dataDict.setValue(empId, forKey: "empId")
         return HandsOnUtilities.getDataFromDict(dataDict: dataDict)
+    }
+    
+    // This method refreshes the time remaining for the trainee
+    // Once reached 0, this method forcibly closes the application
+    // Whenever the trainee wants to refresh the timer, this method
+    // will be called internally
+    func refreshTime () {
+        // Database entries from 'EXAM_STATUS' will be used to refresh the time
+        // Inputs needed are 'exam_code', 'emp_id'
+        var timeDict = NSMutableDictionary()
+        timeDict.setValue(empId, forKey: "empId")
+        timeDict.setValue(examCode, forKey: "examCode")
+        
+        // Create a connection
+        server.delegate = self
+        server.connection = HandsOnUtilities.getConnectionObj(
+            url: "\(HandsOnUtilities.tomcatLocation)/\(HandsOnUtilities.refreshTimeFlag)",
+            data: HandsOnUtilities.getDataFromDict(dataDict: timeDict),
+            httpMethod: "POST", connDelegate: server)
+        server.connection.start()
+        if timer != nil {
+            timer.invalidate()
+        }
+    }
+    
+    // This method is called by the timer every 1 sec
+    // It reduces the timer by 1 sec and updates the label
+    @objc func updateTimer(timer: Timer) {
+        if timeLeft <= 0 {
+            self.view.window?.close()
+        }
+        else if Int.init(timeLeft) == 60 {
+            AppDelegate.appDelegate.showAlert(msg: "15 Minutes More", info: "You have less than 15 minutes left. App will quit automatically after that", but1: "Noted", but2: nil, icon: nil)
+        }
+        else if timeLeft > 0 && timeLeft < 60 {
+            // Change the image to RED
+            timerIcon.image = NSImage.init(named: "r_timer")
+        }
+        else if timeLeft > 60 && timeLeft <= 120 {
+            // Change the image to ORANGE
+            timerIcon.image = NSImage.init(named: "o_timer")
+        }
+        else if timeLeft > 120 {
+            // Change the image to GREEN
+            timerIcon.image = NSImage.init(named: "g_timer")
+        }
+        timeCompFormatter = DateComponentsFormatter.init()
+        timeCompFormatter.allowedUnits = [.hour, .minute, .second]
+        timeCompFormatter.unitsStyle = .positional
+        examTime.stringValue = timeCompFormatter.string(from: timeLeft)!
+        timeLeft -= 1
+        print("New Time: \(timeCompFormatter.string(from: timeLeft)!)")
     }
     
     // Decides which views need to hidden and when
@@ -141,13 +206,43 @@ class ExamController: NSViewController, ServerProtocol {
         pdfViewPop.isHidden = !examView
         nextButton.isHidden = !examView
         submitButton.isHidden = !examView
+        timerIcon.isHidden = !examView
         examTime.isHidden = !examView
     }
     
-    // This method downloads the data from the server
-    // data - downloaded data of the needed file
-    func responseCompletedWithData(data: Data) {
-        print("Inside exam controller with data! \(data)")
+    // This method is called when JSON data is received
+    func jsonObjectReceived(data: Data) {
+        print("JSON Data received: \(String.init(data: data, encoding: .ascii))")
+        do {
+            var jsonDict = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as! Dictionary<String, Any?>
+            // This dictionary contains the start time, end time, emp id of the trainee
+            if jsonDict["empId"] != nil {
+                // Contains some data
+                // Convert the values into Date types in swift
+                var f = DateFormatter.init()
+                f.dateFormat = "MMM dd, yyyy, hh:mm:ss a"
+                startedAt = f.date(from: jsonDict["startedAt"] as! String)
+                endsAt = f.date(from: jsonDict["endsAt"] as! String)
+                
+                // Get the interval between current time and end time
+                if #available(OSX 10.12, *) {
+                    var di = DateInterval.init(start: Date(), end: endsAt)
+                    timeLeft = di.duration
+                    print("Time Left in Seconds: \(timeLeft)")
+                }
+                
+                // Start a timer to reduce the time by 1sec each time
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer(timer:)), userInfo: nil, repeats: true)
+                timer.fire()
+            }
+        }
+        catch {
+            print("JSON Exception")
+        }
+    }
+    
+    func plainTextCodeReceived(data: Data) {
+        print("Plain text received")
         // Get the error code into a string
         // Checking if any errors have occured
         var errorCode = String.init(data: data, encoding: .ascii)
@@ -156,17 +251,31 @@ class ExamController: NSViewController, ServerProtocol {
             return
         }
         else if (errorCode != nil && errorCode == "NO_SUPPLIED_FILES") {
+            // If there are no supplied files provided for this assessment,
+            // there wouldn't be any downloadables. Works mostly for FA2, FA3 & FA4
             AppDelegate.appDelegate.showAlert(msg: "No Downloadables", info: "This assessment does not provide any supplied code. You must create new project in Xcode to work", but1: "Ok", but2: nil, icon: nil)
             return
+        }
+        else if (errorCode != nil && errorCode == "INVALID_EXAM_DETAILS") {
+            // This means the exam details are invalid
+            // 1. Exam code could be invalid
+            // 2. Exam date could be invalid
+            // 3. Even if above two are valid, the time limit could be invalid
+            AppDelegate.appDelegate.showAlert(msg: "No Assessment Present", info: "There is no assessment scheduled currently. Check whether the exam date and time are correct", but1: "Ok", but2: nil, icon: nil)
+            
         }
         else if (errorCode != nil && errorCode!.starts(with: "Name:")) {
             // Set the trainee's name here
             var name = errorCode!.substring(from: String.Index.init(encodedOffset: 5))
             traineeName.stringValue = name.capitalized
         }
-        
+    }
+    
+    func pdfFileReceived (data: Data) {
+        print("PDF file received")
         var pdfDoc = PDFDocument.init(data: data) // TODO: Handle this nil value
         if (fileType == HandsOnUtilities.insCode || fileType == HandsOnUtilities.qprCode) && pdfDoc != nil {
+            print("PDF there \(fileType)")
             // Display the pdf
             // Any condition fail means that, this is some other type of file (.zip)
             pdfViewer.document = pdfDoc!
@@ -174,24 +283,32 @@ class ExamController: NSViewController, ServerProtocol {
             if (fileType == HandsOnUtilities.insCode) {
                 nextButton.isHidden = false
                 submitButton.isHidden = true
+                timerIcon.isHidden = true
+                examTime.isHidden = true
             }
             else if fileType == HandsOnUtilities.qprCode || fileType == HandsOnUtilities.supCode {
+                // Fetch the time left fot the trainee
+                refreshTime()
                 nextButton.isHidden = true
                 submitButton.isHidden = false
+                timerIcon.isHidden = false
+                examTime.isHidden = false
+                
             }
             return
         }
-        else if fileType == HandsOnUtilities.supCode {
+    }
+    
+    func zipFileReceived(data: Data) {
+        if fileType == HandsOnUtilities.supCode {
             // Convert the data into a zip file and save it on desktop
             var fileManager = FileManager.default
-            var fileResult = fileManager.createFile(atPath: "/Users/bros/Desktop/supplied_files.zip", contents: data, attributes: nil)
+            var fileResult = fileManager.createFile(atPath: "\(HandsOnUtilities.baseFilePath)supplied_files.zip", contents: data, attributes: nil)
             if fileResult {
-                // TODO: Logic to tell the file is downloaded
                 AppDelegate.appDelegate.showAlert(msg: "Download Success", info: "Your supplied code files have been downloaded to the Desktop", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
                 return
             }
             else {
-                // TODO: Logic to tell the file is not downloaded
                 AppDelegate.appDelegate.showAlert(msg: "Failed to Download", info: "Your supplied code files could not be downloaded. Kindly check with your invigilator", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("cancel")))
                 return
             }
