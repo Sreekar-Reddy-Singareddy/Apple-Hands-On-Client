@@ -37,12 +37,19 @@ public class Login {
         conn = HandsOnUtils.getMySQLConnection();
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
+        
         // Check if the trainee exists or not
         statement = conn.prepareStatement("SELECT EMP_ID FROM TRAINEES_DATA WHERE EMP_ID = ?");
         statement.setLong(1, trainee.getEmpId());
         resultSet = statement.executeQuery();
         if (!resultSet.next()) { return "NO_TRAINEE"; }
+
+        // Check if the trainee exists or not
+        statement = conn.prepareStatement("SELECT EMP_ID FROM TRAINEES_DATA WHERE EMP_ID = ? AND IP_ADD = ?");
+        statement.setLong(1, trainee.getEmpId());
+        statement.setString(2, trainee.getIp_address());
+        resultSet = statement.executeQuery();
+        if (!resultSet.next()) { return "INVALID_IP"; }
 
         // Check if the trainee has already logged in
         statement = conn.prepareStatement("SELECT EMP_ID FROM EXAM_STATUS WHERE EMP_ID = ? AND EXAM_CODE = ?");

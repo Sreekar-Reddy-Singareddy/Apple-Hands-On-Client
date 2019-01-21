@@ -50,10 +50,12 @@ class LoginController: NSViewController, ServerProtocol {
             var dataDict = NSMutableDictionary()
             dataDict.setValue(empId, forKey: "empId") // TODO: Check for the nil value here
             dataDict.setValue(examCodeNum, forKey: "examCode") // TODO: Any alternative?
-            dataDict.setValue("", forKey: "firstName")
-            dataDict.setValue("", forKey: "lastName")
-            dataDict.setValue("", forKey: "emailId")
-            dataDict.setValue("", forKey: "batchCode")
+            print("IP Address: \(HandsOnUtilities.currentUserIp)")
+            if HandsOnUtilities.currentUserIp.isEmpty {
+                AppDelegate.appDelegate.showAlert(msg: "No Network", info: "Please connect to a network and try again. Press Command+R to refresh once connected.", but1: "Ok", but2: nil, icon: NSImage.init(named: "connection_fail"))
+                return
+            }
+            dataDict.setValue(HandsOnUtilities.currentUserIp, forKey: "ipAddress")
             resData = try JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
         }
         catch {
@@ -89,6 +91,11 @@ class LoginController: NSViewController, ServerProtocol {
         }
         else if respCode != nil && respCode! == "EXAM_FINISHED" {
             var code = AppDelegate.appDelegate.showAlert(msg: "Assessment Ended", info: "Your assessment has already ended. You cannot retake or resubmit the assessment", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
+            examCode = nil
+            self.view.window?.close()
+        }
+        else if respCode != nil && respCode! == "INVALID_IP" {
+            var code = AppDelegate.appDelegate.showAlert(msg: "Unauthorised Login", info: "You are not authorised to login from this iMac. Kindly use your designated iMac", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
             examCode = nil
             self.view.window?.close()
         }

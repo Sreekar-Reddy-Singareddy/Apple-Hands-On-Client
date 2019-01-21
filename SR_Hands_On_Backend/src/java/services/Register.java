@@ -107,7 +107,7 @@ public class Register {
     
     private boolean isValidName (String name) { // TODO; May be we can use custom exceptions here
         // TODO: Validate the name
-        if (name.matches("([A-Za-z])+")) {
+        if (name.matches("([A-Za-z ])+")) {
             return true;
         }
         return false;

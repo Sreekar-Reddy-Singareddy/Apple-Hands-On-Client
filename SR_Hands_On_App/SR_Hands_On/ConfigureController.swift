@@ -33,6 +33,11 @@ class ConfigureController: NSViewController, ServerProtocol {
         connLoader.startAnimation(self)
         
         // Form the IP Address and update it in the utilities
+        if ipOne == nil || ipTwo == nil || ipThree == nil || ipFour == nil || ipOne.stringValue.count > 3 || ipTwo.stringValue.count > 3 || ipThree.stringValue.count > 3 || ipFour.stringValue.count > 3{
+            AppDelegate.appDelegate.showAlert(msg: "Invalid IP Address", info: "Enter a valid IP Address to continue", but1: "Ok", but2: nil, icon: NSImage.init(named: "red_alert"))
+            connLoader.stopAnimation(self)
+            return
+        }
         HandsOnUtilities.tomcatIpAdd = "\(ipOne!).\(ipTwo!).\(ipThree!).\(ipFour!)"
         HandsOnUtilities.updateServerPath()
         print("IP Add: \(HandsOnUtilities.tomcatIpAdd)")
@@ -51,11 +56,11 @@ class ConfigureController: NSViewController, ServerProtocol {
         print("Plain text recieved inside configure controller")
         var code = String.init(data: data, encoding: .ascii)
         if code != nil && code == "TEST_OK" {
-            statusLabel.stringValue = "Connected Successfully"
+            statusLabel.stringValue = "Connected to the server"
             connectionStatus.image = NSImage.init(named: "success")
         }
         else {
-            statusLabel.stringValue = "Connection Failed"
+            statusLabel.stringValue = "Could not connect to server"
             connectionStatus.image = NSImage.init(named: "red_alert")
         }
         statusLabel.isHidden = false

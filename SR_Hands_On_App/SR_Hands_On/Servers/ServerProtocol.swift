@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 @objc protocol ServerProtocol {
     
     // This method is called on delegate when the data is completely received

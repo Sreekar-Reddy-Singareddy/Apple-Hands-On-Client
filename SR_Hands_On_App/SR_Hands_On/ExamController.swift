@@ -68,6 +68,7 @@ class ExamController: NSViewController, ServerProtocol {
     }
     
     @IBAction func logout(_ sender: NSButton) {
+        AppDelegate.appDelegate.showAlert(msg: "Confirm Logout", info: "Are you sure you want to logout?", but1: "Yes", but2: "No", icon: nil)
         self.view.window?.close()
     }
     
@@ -131,7 +132,9 @@ class ExamController: NSViewController, ServerProtocol {
     
     // Before presenting the sheet
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        (segue.destinationController as! SubmitController).mainParentWindow = self.view.window
+        var submitController = segue.destinationController as! SubmitController
+        submitController.mainParentWindow = self.view.window
+        submitController.empId = self.empId
     }
     
     // Creates dictionary of exam information details
@@ -173,18 +176,24 @@ class ExamController: NSViewController, ServerProtocol {
         if timeLeft <= 0 {
             self.view.window?.close()
         }
-        else if Int.init(timeLeft) == 60 {
-            AppDelegate.appDelegate.showAlert(msg: "15 Minutes More", info: "You have less than 15 minutes left. App will quit automatically after that", but1: "Noted", but2: nil, icon: NSImage.init(named: "exam_time_red"))
+        else if Int.init(timeLeft) == 7200 {
+            AppDelegate.appDelegate.deliverNotification(title: "1 hour elapsed", infoText: "You only have 2 hours left", icon: NSImage.init(named: "exam_time_green"))
         }
-        else if timeLeft > 0 && timeLeft < 60 {
+        else if Int.init(timeLeft) == 3600 {
+            AppDelegate.appDelegate.deliverNotification(title: "2 hours elapsed", infoText: "You only have 1 hour left", icon: NSImage.init(named: "exam_time_org"))
+        }
+        else if Int.init(timeLeft) == 900 {
+            AppDelegate.appDelegate.deliverNotification(title: "Time's running", infoText: "You have last 15 minutes", icon: NSImage.init(named: "exam_time_red"))
+        }
+        else if timeLeft > 0 && timeLeft < 900 {
             // Change the image to RED
             timerIcon.image = NSImage.init(named: "exam_time_red")
         }
-        else if timeLeft > 60 && timeLeft <= 120 {
+        else if timeLeft > 900 && timeLeft <= 3600 {
             // Change the image to ORANGE
             timerIcon.image = NSImage.init(named: "exam_time_org")
         }
-        else if timeLeft > 120 {
+        else if timeLeft > 3600 {
             // Change the image to GREEN
             timerIcon.image = NSImage.init(named: "exam_time_green")
         }
@@ -220,9 +229,10 @@ class ExamController: NSViewController, ServerProtocol {
                 // Contains some data
                 // Convert the values into Date types in swift
                 var f = DateFormatter.init()
-                f.dateFormat = "MMM dd, yyyy, hh:mm:ss a"
+                f.dateFormat = "MMM dd, yyyy hh:mm:ss a"
                 startedAt = f.date(from: jsonDict["startedAt"] as! String)
                 endsAt = f.date(from: jsonDict["endsAt"] as! String)
+                print("END TIME: \(endsAt)")
                 
                 // Get the interval between current time and end time
                 if #available(OSX 10.12, *) {
@@ -267,7 +277,7 @@ class ExamController: NSViewController, ServerProtocol {
         else if (errorCode != nil && errorCode!.starts(with: "Name:")) {
             // Set the trainee's name here
             var name = errorCode!.substring(from: String.Index.init(encodedOffset: 5))
-            traineeName.stringValue = name.capitalized
+            traineeName.stringValue = "Hello, \(name.capitalized)!"
         }
     }
     
@@ -305,7 +315,7 @@ class ExamController: NSViewController, ServerProtocol {
             var fileManager = FileManager.default
             var fileResult = fileManager.createFile(atPath: "\(HandsOnUtilities.baseFilePath)supplied_files.zip", contents: data, attributes: nil)
             if fileResult {
-                AppDelegate.appDelegate.showAlert(msg: "Download Success", info: "Your supplied code files have been downloaded to the Desktop", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
+                AppDelegate.appDelegate.showAlert(msg: "Download Success", info: "Your supplied code files have been downloaded to the Desktop as 'supplied_files.zip'", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
                 return
             }
             else {

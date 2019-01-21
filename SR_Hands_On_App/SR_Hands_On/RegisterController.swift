@@ -32,29 +32,34 @@ class RegisterController: NSViewController, ServerProtocol {
         // Validate the fields
         if (empId == nil || empId == 0) {
             // Employee ID empty
-            AppDelegate.appDelegate.showAlert(msg: "Employee ID Empty", info: "Please enter the id and proceed", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
+            AppDelegate.appDelegate.showAlert(msg: "Employee ID Empty", info: "Please enter your employee id to continue", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
             return
         }
         else if (fName == nil || fName.isEmpty) {
             // First name empty
-            AppDelegate.appDelegate.showAlert(msg: "First Name Empty", info: "Please enter the first name and proceed", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
+            AppDelegate.appDelegate.showAlert(msg: "First Name Empty", info: "Please enter the first name to continue", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
             return
         }
         else if (lName == nil || lName.isEmpty) {
             // Last name empty
-            AppDelegate.appDelegate.showAlert(msg: "Last Name Empty", info: "Please enter the last name and proceed", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
+            AppDelegate.appDelegate.showAlert(msg: "Last Name Empty", info: "Please enter the last name to continue", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
             return
         }
         else if (emailId == nil || emailId.isEmpty) {
             // Email ID empty
-            AppDelegate.appDelegate.showAlert(msg: "Email ID Empty", info: "Please enter the infosys email id and proceed", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
+            AppDelegate.appDelegate.showAlert(msg: "Email ID Empty", info: "Please enter the infosys email id to continue", but1: "Ok", but2: nil, icon: NSImage.init(named: "missing_field"))
             return
         }
         
         // Create a dictionary for the trainee
         var traineeDict = NSMutableDictionary()
         traineeDict.setValue(empId, forKey: "empId")
-        traineeDict.setValue(HandsOnUtilities.getIFAddresses()[1], forKey: "ip_address")
+        if HandsOnUtilities.currentUserIp.isEmpty {
+            AppDelegate.appDelegate.showAlert(msg: "No Network", info: "Please connect to a network and try again", but1: "Ok", but2: nil, icon: NSImage.init(named: "connection_fail"))
+            return
+        }
+        print("Ip Address in Register: \(HandsOnUtilities.currentUserIp)")
+        traineeDict.setValue(HandsOnUtilities.currentUserIp, forKey: "ipAddress")
         traineeDict.setValue(fName, forKey: "firstName")
         traineeDict.setValue(lName, forKey: "lastName")
         traineeDict.setValue(emailId, forKey: "emailId")

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 class MainServer: NSObject, NSURLConnectionDataDelegate {
     
@@ -29,6 +30,7 @@ class MainServer: NSObject, NSURLConnectionDataDelegate {
     func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
         // TODO: Tell the user about the failed connection
         print("Connection Failed: \(error.localizedDescription)")
+        AppDelegate.appDelegate.showAlert(msg: "No Network", info: "Please connect to a network and try again. Press Command+R to refresh the connection", but1: "Ok", but2: nil, icon: NSImage.init(named: "connection_fail"))
         delegate.plainTextCodeReceived!(data: nil)
     }
     

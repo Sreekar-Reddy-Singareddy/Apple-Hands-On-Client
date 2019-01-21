@@ -29,6 +29,11 @@
                                                 <segue destination="DZT-3M-7cQ" kind="show" id="fkr-PR-U0w"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Refresh Internet" keyEquivalent="r" id="LcD-JS-kmy">
+                                            <connections>
+                                                <action selector="refreshInternet:" target="Voe-Tx-rLC" id="dBX-TP-vnI"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -893,11 +898,11 @@ DQ
             <objects>
                 <viewController identifier="MainVC" storyboardIdentifier="MainVC" id="XfG-lQ-9wD" customClass="ViewController" customModule="SR_Hands_On" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="370" height="163"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="183"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="Mqg-zG-x4C">
-                                <rect key="frame" x="235" y="78" width="35" height="35"/>
+                                <rect key="frame" x="235" y="98" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="7Lm-ZI-tB6"/>
                                     <constraint firstAttribute="height" constant="35" id="wHU-sL-GQj"/>
@@ -911,7 +916,7 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9cF-aC-Ms9">
-                                <rect key="frame" x="213" y="50" width="79" height="20"/>
+                                <rect key="frame" x="213" y="70" width="79" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="X2c-n1-E2C"/>
                                     <constraint firstAttribute="height" constant="20" id="pmi-en-FDV"/>
@@ -923,7 +928,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="uFT-ho-q4e">
-                                <rect key="frame" x="100" y="78" width="35" height="35"/>
+                                <rect key="frame" x="100" y="98" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="6zb-DP-29u"/>
                                     <constraint firstAttribute="height" constant="35" id="YyM-Wa-mGv"/>
@@ -938,7 +943,7 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yhD-vd-sfa">
-                                <rect key="frame" x="78" y="50" width="79" height="20"/>
+                                <rect key="frame" x="78" y="70" width="79" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="4Q4-HO-eK5"/>
                                     <constraint firstAttribute="width" constant="75" id="Px0-2u-HNQ"/>
@@ -949,26 +954,40 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L2P-D2-23Q">
+                                <rect key="frame" x="101" y="10" width="168" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="mdI-Za-FrT"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="Developer: Sreekar Singareddy" id="j5V-UI-2LJ">
+                                    <font key="font" metaFont="systemBold" size="10"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Mqg-zG-x4C" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="50" id="1oh-xh-Um2"/>
                             <constraint firstItem="uFT-ho-q4e" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="50" id="8jy-xN-Doi"/>
                             <constraint firstItem="Mqg-zG-x4C" firstAttribute="leading" secondItem="uFT-ho-q4e" secondAttribute="trailing" constant="100" id="9v9-1b-Tfm"/>
                             <constraint firstItem="Mqg-zG-x4C" firstAttribute="centerX" secondItem="9cF-aC-Ms9" secondAttribute="centerX" id="I4b-cf-ZpK"/>
-                            <constraint firstAttribute="bottom" secondItem="yhD-vd-sfa" secondAttribute="bottom" constant="50" id="MUa-fU-4qj"/>
-                            <constraint firstAttribute="bottom" secondItem="9cF-aC-Ms9" secondAttribute="bottom" constant="50" id="QQL-M5-Wte"/>
+                            <constraint firstAttribute="bottom" secondItem="yhD-vd-sfa" secondAttribute="bottom" constant="70" id="MUa-fU-4qj"/>
+                            <constraint firstItem="L2P-D2-23Q" firstAttribute="top" secondItem="yhD-vd-sfa" secondAttribute="bottom" constant="40" id="O8V-nc-cf6"/>
+                            <constraint firstAttribute="bottom" secondItem="9cF-aC-Ms9" secondAttribute="bottom" constant="70" id="QQL-M5-Wte"/>
                             <constraint firstItem="9cF-aC-Ms9" firstAttribute="top" secondItem="Mqg-zG-x4C" secondAttribute="bottom" constant="8" id="bBa-rN-MyJ"/>
                             <constraint firstAttribute="trailing" secondItem="Mqg-zG-x4C" secondAttribute="trailing" constant="100" id="dd7-3Y-jS8"/>
+                            <constraint firstAttribute="bottom" secondItem="L2P-D2-23Q" secondAttribute="bottom" constant="10" id="jIN-mE-fKJ"/>
                             <constraint firstItem="yhD-vd-sfa" firstAttribute="centerX" secondItem="uFT-ho-q4e" secondAttribute="centerX" id="jTH-ek-OqA"/>
                             <constraint firstItem="yhD-vd-sfa" firstAttribute="top" secondItem="uFT-ho-q4e" secondAttribute="bottom" constant="8" id="nbB-4g-IQd"/>
                             <constraint firstItem="Mqg-zG-x4C" firstAttribute="leading" secondItem="uFT-ho-q4e" secondAttribute="trailing" constant="100" id="o9g-JW-ohg"/>
+                            <constraint firstItem="L2P-D2-23Q" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="wna-D4-an0"/>
                             <constraint firstItem="uFT-ho-q4e" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="100" id="x1u-Kf-y3j"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="667"/>
+            <point key="canvasLocation" x="75" y="666.5"/>
         </scene>
         <!--Login-->
         <scene sceneID="meV-7l-Fbk">
@@ -1307,17 +1326,17 @@ DQ
                                 </connections>
                             </button>
                             <pdfView hidden="YES" autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ltv-KU-icb">
-                                <rect key="frame" x="124" y="50" width="900" height="786"/>
+                                <rect key="frame" x="124" y="60" width="900" height="776"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="800" id="oMG-sS-sj4"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="yIM-1k-TQb"/>
                                 </constraints>
                             </pdfView>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="nLU-ao-rtW" userLabel="Stop Exam Buttton">
-                                <rect key="frame" x="20" y="20" width="20" height="20"/>
+                            <button hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLU-ao-rtW" userLabel="Stop Exam Buttton">
+                                <rect key="frame" x="20" y="20" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="Qr3-cu-5mn"/>
-                                    <constraint firstAttribute="height" constant="20" id="hhr-Bq-FTR"/>
+                                    <constraint firstAttribute="width" constant="30" id="Qr3-cu-5mn"/>
+                                    <constraint firstAttribute="height" constant="30" id="hhr-Bq-FTR"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_stop" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="6sj-Bq-vcH">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1328,7 +1347,7 @@ DQ
                                 </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4cY-CK-Qsf">
-                                <rect key="frame" x="504" y="19" width="140" height="21"/>
+                                <rect key="frame" x="504" y="24" width="140" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="4C3-nG-mPp"/>
                                     <constraint firstAttribute="height" constant="20" id="Oo8-ki-5rw"/>
@@ -1360,12 +1379,12 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="oYx-zC-w5B" userLabel="Next">
-                                <rect key="frame" x="1004" y="20" width="20" height="20"/>
+                                <rect key="frame" x="994" y="20" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="2Dg-0S-bWd"/>
-                                    <constraint firstAttribute="width" constant="20" id="MSX-XG-Dxn"/>
+                                    <constraint firstAttribute="width" constant="30" id="MSX-XG-Dxn"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="jVg-wx-KPk"/>
-                                    <constraint firstAttribute="height" constant="20" id="z4I-hM-7vz"/>
+                                    <constraint firstAttribute="height" constant="30" id="z4I-hM-7vz"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_next" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Qpa-Mc-x9S">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1376,10 +1395,10 @@ DQ
                                 </connections>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="WYW-x3-VIr" userLabel="Submit">
-                                <rect key="frame" x="1004" y="20" width="20" height="20"/>
+                                <rect key="frame" x="994" y="20" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="GtK-BT-pNp"/>
-                                    <constraint firstAttribute="height" constant="20" id="kNM-8F-anF"/>
+                                    <constraint firstAttribute="width" constant="30" id="GtK-BT-pNp"/>
+                                    <constraint firstAttribute="height" constant="30" id="kNM-8F-anF"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="upload" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="w0E-hO-iQW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1390,9 +1409,9 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xS6-Hj-u95">
-                                <rect key="frame" x="18" y="844" width="204" height="17"/>
+                                <rect key="frame" x="18" y="844" width="304" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="voh-D1-V1a"/>
+                                    <constraint firstAttribute="width" constant="300" id="voh-D1-V1a"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sreekar Reddy" id="7V5-N0-rq0">
                                     <font key="font" metaFont="systemSemibold" size="13"/>
@@ -1401,17 +1420,17 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <pdfThumbnailView wantsLayer="YES" focusRingType="exterior" translatesAutoresizingMaskIntoConstraints="NO" id="uy2-dB-1U7">
-                                <rect key="frame" x="0.0" y="50" width="120" height="786"/>
+                                <rect key="frame" x="0.0" y="60" width="120" height="776"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="QO1-5b-9nG"/>
                                 </constraints>
                                 <size key="thumbnailSize" width="60" height="64"/>
                             </pdfThumbnailView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="t4V-XG-3sD">
-                                <rect key="frame" x="964" y="20" width="20" height="20"/>
+                                <rect key="frame" x="944" y="20" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="65H-SQ-Ntn"/>
-                                    <constraint firstAttribute="width" constant="20" id="ing-GK-fiV"/>
+                                    <constraint firstAttribute="height" constant="30" id="65H-SQ-Ntn"/>
+                                    <constraint firstAttribute="width" constant="30" id="ing-GK-fiV"/>
                                 </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="download" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="3gp-Fd-wgC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1428,13 +1447,16 @@ DQ
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Launch the Assessment" id="cQz-qH-NjP">
                                     <font key="font" metaFont="systemMedium" size="13"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" red="0.20946601033210754" green="0.43824666738510132" blue="0.96447676420211792" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V6J-Q4-tuI">
-                                <rect key="frame" x="916" y="843" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="V6J-Q4-tuI">
+                                <rect key="frame" x="920" y="843" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="oyT-dw-cEh"/>
+                                    <constraint firstAttribute="height" constant="20" id="yWS-5C-UEI"/>
+                                </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="exam_time_green" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="RmL-Wq-TFk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1452,6 +1474,7 @@ DQ
                             <constraint firstItem="1fx-bG-EvU" firstAttribute="centerY" secondItem="kuf-X7-gfg" secondAttribute="centerY" id="9gz-Yy-E8x"/>
                             <constraint firstItem="oYx-zC-w5B" firstAttribute="centerY" secondItem="nLU-ao-rtW" secondAttribute="centerY" id="CIT-tV-ip6"/>
                             <constraint firstItem="xS6-Hj-u95" firstAttribute="top" secondItem="kuf-X7-gfg" secondAttribute="top" constant="20" id="Ct6-I1-AVl"/>
+                            <constraint firstItem="ilf-kh-Zes" firstAttribute="centerY" secondItem="V6J-Q4-tuI" secondAttribute="centerY" id="Jgj-az-uhq"/>
                             <constraint firstItem="Ltv-KU-icb" firstAttribute="top" secondItem="ilf-kh-Zes" secondAttribute="bottom" constant="8" id="Kbd-1j-ID3"/>
                             <constraint firstAttribute="bottom" secondItem="nLU-ao-rtW" secondAttribute="bottom" constant="20" id="Ojz-Tk-0ra"/>
                             <constraint firstItem="oYx-zC-w5B" firstAttribute="leading" secondItem="t4V-XG-3sD" secondAttribute="trailing" constant="20" id="P19-1c-I5w"/>
@@ -1462,6 +1485,7 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="ilf-kh-Zes" secondAttribute="trailing" constant="20" id="cMB-dF-GaR"/>
                             <constraint firstItem="t4V-XG-3sD" firstAttribute="top" secondItem="Ltv-KU-icb" secondAttribute="bottom" constant="10" id="fXN-HV-JIJ"/>
                             <constraint firstItem="uy2-dB-1U7" firstAttribute="leading" secondItem="kuf-X7-gfg" secondAttribute="leading" id="gSv-IV-xIF"/>
+                            <constraint firstItem="ilf-kh-Zes" firstAttribute="leading" secondItem="V6J-Q4-tuI" secondAttribute="trailing" constant="4" id="gcW-bQ-hMy"/>
                             <constraint firstItem="Ltv-KU-icb" firstAttribute="leading" secondItem="uy2-dB-1U7" secondAttribute="trailing" constant="4" id="gnQ-dc-cm0"/>
                             <constraint firstAttribute="bottom" secondItem="oYx-zC-w5B" secondAttribute="bottom" constant="20" id="iEx-yW-8zz"/>
                             <constraint firstItem="1fx-bG-EvU" firstAttribute="centerX" secondItem="kuf-X7-gfg" secondAttribute="centerX" id="jXZ-Sw-aZN"/>
@@ -1560,7 +1584,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" alignment="center" id="KxG-NV-Pqa">
                                     <font key="font" metaFont="systemBold" size="10"/>
-                                    <string key="title">Scanner will look for your project file only on the Desktop. Make sure you placed your file on Desktop in the format EMPID_FA1.zip</string>
+                                    <string key="title">Scanner will look for your project file only on the Desktop. Make sure you have placed your file on Desktop in the format EMPID_FA1.zip</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

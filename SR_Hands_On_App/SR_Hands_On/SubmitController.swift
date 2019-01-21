@@ -19,6 +19,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
     var fMan = HandsOnUtilities.getFileManager()
     var mainParentWindow: NSWindow!
     var server = HandsOnUtilities.getMainServer()
+    var empId: NSNumber!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +34,18 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
     
     // Checks if there is any file with the given name
     @IBAction func checkFile(_ sender: NSButton) {
+        // First check if the file is in specified format or not
+        if self.fileName.count != self.empId.stringValue.count+8 || !(self.fileName.contains("\(self.empId.stringValue)")) {
+            print("Incorrect format!")
+            AppDelegate.appDelegate.showAlert(msg: "Incorrect Name Format", info: "The file name must contain your Emp ID. Rename the file and try again", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))
+            return
+        }
         
         // Logic to check the file in default directory
         var fullFilePath = HandsOnUtilities.baseFilePath + self.fileName
         if fMan.fileExists(atPath: fullFilePath) {
             // File exists, so proceed to submit it
-            var code = AppDelegate.appDelegate.showAlert(msg: "Confirm Submission", info: "Are you sure you want to submit \(self.fileName!)? Once submitted, you cannot do undo it", but1: "Confirm", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("confirm_action")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Confirm Submission", info: "Are you sure you want to submit \(self.fileName!)? Once submitted, you cannot undo the action", but1: "Confirm", but2: "Cancel", icon: NSImage.init(named: NSImage.Name("confirm_action")))
             if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                 // TODO: Logic to upload the file to the server
                 uploadFile(fullFilePath: fullFilePath)
@@ -81,7 +88,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
             var subStrings = fileName!.split(separator: ".")
             if subStrings.count == 2 {
                 // This means format is valid
-                if subStrings[1].lowercased() == "zip" {
+                if subStrings[1] == "zip" {
                     // This means even the extension is correct
                     // Enable the button now
                     checkFileButton.isEnabled = true
@@ -103,7 +110,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
             reqDict.setValue(HandsOnUtilities.examCode, forKey: "examCode")
             var reqData = HandsOnUtilities.getDataFromDict(dataDict: reqDict)
             server.connection = HandsOnUtilities.getConnectionObj(
-                url: "\(HandsOnUtilities.tomcatLocation)submit_update",
+                url: "\(HandsOnUtilities.tomcatLocation)\(HandsOnUtilities.submitUpdateFlag)",
                 data: reqData,
                 httpMethod: "POST", connDelegate: server)
             server.connection.start()

@@ -10,9 +10,9 @@ import Foundation
 
 class HandsOnUtilities: NSObject {
     
-    public static var tomcatIpAdd = "127.0.0.1"
+    public static var tomcatIpAdd = "192.168.43.103"
     public static var tomcatPort = "8080"
-    public static var tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/HandsNew/sr/"
+    public static var tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/srhandson/"
     
     public static var loginFlag = "login"
     public static var registerFlag = "register"
@@ -20,6 +20,7 @@ class HandsOnUtilities: NSObject {
     public static var traineeFlag = "trainee"
     public static var submitFlag = "submit"
     public static var refreshTimeFlag = "refresh_time"
+    public static var submitUpdateFlag = "submit_update"
     
     public static var insCode = "INS"
     public static var qprCode = "QPR"
@@ -28,7 +29,9 @@ class HandsOnUtilities: NSObject {
     public static var empId = 0
     public static var examCode = 0
     
-    public static var baseFilePath = "/Users/sreekar/Desktop/"
+    public static var currentUser = "no_user"
+    public static var baseFilePath = "/Users/\(currentUser)/Desktop/"
+    public static var currentUserIp = ""
     
     // Single object of main server
     private static var mainServer = MainServer()
@@ -37,7 +40,12 @@ class HandsOnUtilities: NSObject {
     private static var mainFileManager = FileManager.default
     
     static func updateServerPath () {
-        tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/HandsNew/sr/"
+        tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/srhandson/"
+    }
+    
+    static func updateStaticVariables () {
+        tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/srhandson/"
+        baseFilePath = "/Users/\(currentUser)/Desktop/"
     }
     
     static func getMainServer () -> MainServer{
@@ -56,7 +64,7 @@ class HandsOnUtilities: NSObject {
         if (data != nil) {
             req.httpBodyStream = InputStream.init(data: data!)
         }
-        req.timeoutInterval = 10
+        req.timeoutInterval = 5
         var conn = NSURLConnection.init(request: req, delegate: del) // TODO: Handle force unwrap
         print("Connection: \(conn)")
         return conn!
@@ -107,6 +115,9 @@ class HandsOnUtilities: NSObject {
         }
         
         freeifaddrs(ifaddr)
+        if addresses.count >= 2{
+            currentUserIp = addresses[1]
+        }
         return addresses
     }
 }

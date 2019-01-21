@@ -132,6 +132,7 @@ public class Exammode {
                 timerTrainee.put("examCode", exam.getExamCode());
                 timerTrainee.put("startedAt", resultSet.getObject("STARTED_AT"));
                 timerTrainee.put("endsAt", resultSet.getObject("ENDS_AT"));
+                System.out.println("Timer Details: "+timerTrainee);
                 return timerTrainee;
             }
             return null;

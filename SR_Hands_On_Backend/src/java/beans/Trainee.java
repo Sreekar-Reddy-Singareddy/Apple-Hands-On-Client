@@ -16,7 +16,7 @@ public class Trainee {
     private Long empId;
     private String emailId;
     private String batchCode;
-    private String ip_address;
+    private String ipAddress;
 
      public Trainee () {
         firstName = "";
@@ -24,7 +24,7 @@ public class Trainee {
         empId = 0l;
         emailId = "";
         batchCode = "";
-        ip_address = "";
+        ipAddress = "";
     }
     
     public String getFirstName() {
@@ -68,11 +68,11 @@ public class Trainee {
     }
 
     public String getIp_address() {
-        return ip_address;
+        return ipAddress;
     }
 
-    public void setIp_address(String ip_address) {
-        this.ip_address = ip_address;
+    public void setIp_address(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
     
     
