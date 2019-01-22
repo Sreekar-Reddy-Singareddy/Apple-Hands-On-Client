@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		120879BE21E6F96B00A57F48 /* SubmitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120879BD21E6F96B00A57F48 /* SubmitController.swift */; };
+		1247F5C321F6D61000A9AF6D /* PopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1247F5C221F6D61000A9AF6D /* PopController.swift */; };
 		12678A8021E5B6F40045B71D /* ExamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12678A7F21E5B6F40045B71D /* ExamController.swift */; };
 		12C7A3E421E461570006F700 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E321E461570006F700 /* LoginController.swift */; };
 		12C7A3E621E463270006F700 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7A3E521E463270006F700 /* RegisterController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		120879BD21E6F96B00A57F48 /* SubmitController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitController.swift; sourceTree = "<group>"; };
+		1247F5C221F6D61000A9AF6D /* PopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopController.swift; sourceTree = "<group>"; };
 		12678A7F21E5B6F40045B71D /* ExamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamController.swift; sourceTree = "<group>"; };
 		12C7A3E321E461570006F700 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		12C7A3E521E463270006F700 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				12C7A3E321E461570006F700 /* LoginController.swift */,
 				12C7A3E521E463270006F700 /* RegisterController.swift */,
 				12678A7F21E5B6F40045B71D /* ExamController.swift */,
+				1247F5C221F6D61000A9AF6D /* PopController.swift */,
 				120879BD21E6F96B00A57F48 /* SubmitController.swift */,
 				18BE8CBA21D632BD003A2C21 /* Assets.xcassets */,
 				18BE8CBC21D632BD003A2C21 /* Main.storyboard */,
@@ -188,6 +191,7 @@
 				18BE8CB721D632B8003A2C21 /* AppDelegate.swift in Sources */,
 				12678A8021E5B6F40045B71D /* ExamController.swift in Sources */,
 				12C7A40E21E4732A0006F700 /* HandsOnUtilities.swift in Sources */,
+				1247F5C321F6D61000A9AF6D /* PopController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

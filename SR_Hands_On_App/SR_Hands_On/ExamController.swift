@@ -19,6 +19,7 @@ class ExamController: NSViewController, ServerProtocol {
     var timeLeft: TimeInterval!
     var timer: Timer!
     var timeCompFormatter: DateComponentsFormatter!
+    var startMode:String!
     
     let server = HandsOnUtilities.getMainServer()
     
@@ -78,6 +79,14 @@ class ExamController: NSViewController, ServerProtocol {
     
     // This method fetched the main assessment file
     @IBAction func next(_ sender: NSButton) {
+        // Display alert to the user
+        if startMode == "VALID" {
+            let code = AppDelegate.appDelegate.showAlert(msg: "Launch the assessment?", info: "Once you launch, your assessment time starts running. You have 3 hrs to complete the assessment", but1: "Launch", but2: "Cancel", icon: NSImage.init(named: "confirm_action"))
+            if code == NSApplication.ModalResponse.alertSecondButtonReturn.rawValue {
+                return
+            }
+        }
+        
         print("Inside next method")
         downloadButton.isHidden = false
         // Set the file type as 'Quesion Paper'
@@ -232,11 +241,12 @@ class ExamController: NSViewController, ServerProtocol {
                 f.dateFormat = "MMM dd, yyyy hh:mm:ss a"
                 startedAt = f.date(from: jsonDict["startedAt"] as! String)
                 endsAt = f.date(from: jsonDict["endsAt"] as! String)
+                var timeStamp = f.date(from: jsonDict["timeStamp"] as! String) // Get this from backend
                 print("END TIME: \(endsAt)")
                 
                 // Get the interval between current time and end time
                 if #available(OSX 10.12, *) {
-                    var di = DateInterval.init(start: Date(), end: endsAt)
+                    var di = DateInterval.init(start: timeStamp!, end: endsAt)
                     timeLeft = di.duration
                     print("Time Left in Seconds: \(timeLeft)")
                 }
@@ -296,18 +306,23 @@ class ExamController: NSViewController, ServerProtocol {
                 timerIcon.isHidden = true
                 examTime.isHidden = true
             }
-            else if fileType == HandsOnUtilities.qprCode || fileType == HandsOnUtilities.supCode {
+            else if fileType == HandsOnUtilities.qprCode {
+                // Present a segue here
+                let popVC = storyboard?.instantiateController(withIdentifier: "PopVC") as! PopController
+//                self.present(popVC, asPopoverRelativeTo: popVC.view.bounds, of: downloadButton, preferredEdge: .minY, behavior: .transient)
+                print("Presented as popover \(popVC)")
+                
                 // Fetch the time left fot the trainee
                 refreshTime()
                 nextButton.isHidden = true
                 submitButton.isHidden = false
                 timerIcon.isHidden = false
                 examTime.isHidden = false
-                
             }
             return
         }
     }
+    
     
     func zipFileReceived(data: Data) {
         if fileType == HandsOnUtilities.supCode {

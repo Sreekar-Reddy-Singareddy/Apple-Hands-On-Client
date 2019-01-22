@@ -84,6 +84,7 @@ class LoginController: NSViewController, ServerProtocol {
             HandsOnUtilities.examCode = self.examCodeNum
             examController.examCode = self.examCodeNum // TODO: Remove them
             examController.empId = empId // TODO: Remove them
+            examController.startMode = respCode!
         }
         else if respCode != nil && respCode! == "NO_EXAM_TODAY" {
             var code = AppDelegate.appDelegate.showAlert(msg: "Login Failed", info: "There are no assessments scheduled at this time, for the given code", but1: "Ok", but2: nil, icon: NSImage.init(named: NSImage.Name("red_alert")))

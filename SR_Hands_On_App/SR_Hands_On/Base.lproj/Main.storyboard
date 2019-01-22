@@ -1326,7 +1326,7 @@ DQ
                                 </connections>
                             </button>
                             <pdfView hidden="YES" autoresizesSubviews="NO" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ltv-KU-icb">
-                                <rect key="frame" x="124" y="60" width="900" height="776"/>
+                                <rect key="frame" x="124" y="60" width="900" height="764"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="800" id="oMG-sS-sj4"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="600" id="yIM-1k-TQb"/>
@@ -1414,13 +1414,13 @@ DQ
                                     <constraint firstAttribute="width" constant="300" id="voh-D1-V1a"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sreekar Reddy" id="7V5-N0-rq0">
-                                    <font key="font" metaFont="systemSemibold" size="13"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <pdfThumbnailView wantsLayer="YES" focusRingType="exterior" translatesAutoresizingMaskIntoConstraints="NO" id="uy2-dB-1U7">
-                                <rect key="frame" x="0.0" y="60" width="120" height="776"/>
+                                <rect key="frame" x="0.0" y="60" width="120" height="764"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="QO1-5b-9nG"/>
                                 </constraints>
@@ -1475,7 +1475,7 @@ DQ
                             <constraint firstItem="oYx-zC-w5B" firstAttribute="centerY" secondItem="nLU-ao-rtW" secondAttribute="centerY" id="CIT-tV-ip6"/>
                             <constraint firstItem="xS6-Hj-u95" firstAttribute="top" secondItem="kuf-X7-gfg" secondAttribute="top" constant="20" id="Ct6-I1-AVl"/>
                             <constraint firstItem="ilf-kh-Zes" firstAttribute="centerY" secondItem="V6J-Q4-tuI" secondAttribute="centerY" id="Jgj-az-uhq"/>
-                            <constraint firstItem="Ltv-KU-icb" firstAttribute="top" secondItem="ilf-kh-Zes" secondAttribute="bottom" constant="8" id="Kbd-1j-ID3"/>
+                            <constraint firstItem="Ltv-KU-icb" firstAttribute="top" secondItem="ilf-kh-Zes" secondAttribute="bottom" constant="20" id="Kbd-1j-ID3"/>
                             <constraint firstAttribute="bottom" secondItem="nLU-ao-rtW" secondAttribute="bottom" constant="20" id="Ojz-Tk-0ra"/>
                             <constraint firstItem="oYx-zC-w5B" firstAttribute="leading" secondItem="t4V-XG-3sD" secondAttribute="trailing" constant="20" id="P19-1c-I5w"/>
                             <constraint firstAttribute="bottom" secondItem="WYW-x3-VIr" secondAttribute="bottom" constant="20" id="WXv-nw-svw"/>
@@ -1492,7 +1492,7 @@ DQ
                             <constraint firstItem="oYx-zC-w5B" firstAttribute="leading" secondItem="t4V-XG-3sD" secondAttribute="trailing" constant="20" id="jgh-v4-AZB"/>
                             <constraint firstItem="zz4-u3-zOm" firstAttribute="top" secondItem="1fx-bG-EvU" secondAttribute="bottom" constant="10" id="lVW-Xd-q8F"/>
                             <constraint firstAttribute="trailing" secondItem="Ltv-KU-icb" secondAttribute="trailing" constant="20" id="mfS-Pk-w03"/>
-                            <constraint firstItem="uy2-dB-1U7" firstAttribute="top" secondItem="xS6-Hj-u95" secondAttribute="bottom" constant="8" id="oUc-nv-HX4"/>
+                            <constraint firstItem="uy2-dB-1U7" firstAttribute="top" secondItem="xS6-Hj-u95" secondAttribute="bottom" constant="20" id="oUc-nv-HX4"/>
                             <constraint firstAttribute="bottom" secondItem="t4V-XG-3sD" secondAttribute="bottom" constant="20" id="oxg-k6-Xnm"/>
                             <constraint firstItem="4cY-CK-Qsf" firstAttribute="centerX" secondItem="Ltv-KU-icb" secondAttribute="centerX" id="qqh-vJ-0cL"/>
                             <constraint firstAttribute="trailing" secondItem="WYW-x3-VIr" secondAttribute="trailing" constant="20" id="s7L-Ua-fSg"/>
@@ -1519,6 +1519,38 @@ DQ
                 <customObject id="oOg-zN-094" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1305.5" y="580.5"/>
+        </scene>
+        <!--Pop Controller-->
+        <scene sceneID="ZCa-mS-0mV">
+            <objects>
+                <viewController storyboardIdentifier="PopVC" id="RJP-07-jAN" customClass="PopController" customModule="SR_Hands_On" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="sIe-Kk-f5W">
+                        <rect key="frame" x="0.0" y="0.0" width="215" height="27"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xf6-sf-3pP">
+                                <rect key="frame" x="3" y="5" width="209" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="205" id="o75-HI-Tgp"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Click this icon to refresh the time" id="fv1-O4-jCJ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Xf6-sf-3pP" firstAttribute="top" secondItem="sIe-Kk-f5W" secondAttribute="top" constant="5" id="Ka6-7e-U5T"/>
+                            <constraint firstItem="Xf6-sf-3pP" firstAttribute="leading" secondItem="sIe-Kk-f5W" secondAttribute="leading" constant="5" id="OZl-s8-dzD"/>
+                            <constraint firstAttribute="trailing" secondItem="Xf6-sf-3pP" secondAttribute="trailing" constant="5" id="fOV-CJ-48T"/>
+                            <constraint firstAttribute="bottom" secondItem="Xf6-sf-3pP" secondAttribute="bottom" constant="5" id="l2y-GS-OGu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="u0p-qq-nZy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1729" y="21"/>
         </scene>
         <!--Submit Controller-->
         <scene sceneID="vQ8-1k-mhN">

@@ -122,7 +122,7 @@ public class Exammode {
         HashMap <String, Object> timerTrainee = new HashMap<>();
         // SQL Logic
         try {
-            PreparedStatement statement = conn.prepareStatement("SELECT STARTED_AT, ENDS_AT FROM EXAM_STATUS WHERE EMP_ID = ? AND EXAM_CODE = ?");
+            PreparedStatement statement = conn.prepareStatement("SELECT STARTED_AT, ENDS_AT, NOW() TIME_STAMP FROM EXAM_STATUS WHERE EMP_ID = ? AND EXAM_CODE = ?");
             statement.setLong(1, trainee.getEmpId());
             statement.setLong(2, exam.getExamCode());
             ResultSet resultSet = statement.executeQuery();
@@ -132,6 +132,7 @@ public class Exammode {
                 timerTrainee.put("examCode", exam.getExamCode());
                 timerTrainee.put("startedAt", resultSet.getObject("STARTED_AT"));
                 timerTrainee.put("endsAt", resultSet.getObject("ENDS_AT"));
+                timerTrainee.put("timeStamp", resultSet.getObject("TIME_STAMP"));
                 System.out.println("Timer Details: "+timerTrainee);
                 return timerTrainee;
             }
