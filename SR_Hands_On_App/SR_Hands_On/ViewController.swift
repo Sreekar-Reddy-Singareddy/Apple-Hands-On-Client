@@ -11,10 +11,32 @@ import Cocoa
 class ViewController: NSViewController {
 
     var story: NSStoryboard!
+    var plistPath: String!
+    var plistData:NSMutableDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         story = NSStoryboard.init(name: NSStoryboard.Name("Main"), bundle: nil)
+        
+        // Take care of the plist here
+        plistPath = HandsOnUtilities.getFileManager().currentDirectoryPath.appending("/handson.plist")
+        
+        // Check if it is there
+        if !HandsOnUtilities.getFileManager().fileExists(atPath: plistPath) {
+            // Not exists
+            // Create new plist
+            var fm = HandsOnUtilities.getFileManager()
+            plistPath = fm.currentDirectoryPath.appending("/handson.plist")
+            plistData = NSMutableDictionary.init()
+            plistData.setValue(HandsOnUtilities.tomcatIpAdd, forKey: "server_ip")
+            
+            print("Data Written to Plist: ",plistData.write(toFile: plistPath, atomically: true))
+        }
+        else {
+            // Exists
+            plistData = NSMutableDictionary.init(contentsOfFile: plistPath)
+            HandsOnUtilities.tomcatIpAdd = plistData.value(forKey: "server_ip") as! String
+        }
     }
     
     @IBAction func login(_ sender: NSButton) {

@@ -29,7 +29,7 @@ public class SubmitFile {
     
     public boolean submitFile (String fileName, InputStream fileData){
         try {
-            File file = new File(HandsOnUtils.BASE_PATH + "SR_Submissions/" + fileName);
+            File file = new File(HandsOnUtils.BASE_PATH + "Submissions/" + fileName);
             System.out.println("Exists: "+file.exists());
             System.out.println("Created: "+file.createNewFile());
             FileOutputStream oStream = new FileOutputStream(file);

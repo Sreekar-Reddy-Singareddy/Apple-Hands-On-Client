@@ -20,6 +20,7 @@ class ConfigureController: NSViewController, ServerProtocol {
     @objc dynamic var ipFour: NSNumber!
     
     var server = HandsOnUtilities.getMainServer()
+    var plistPath:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,13 @@ class ConfigureController: NSViewController, ServerProtocol {
         if code != nil && code == "TEST_OK" {
             statusLabel.stringValue = "Connected to the server"
             connectionStatus.image = NSImage.init(named: "success")
+            plistPath = HandsOnUtilities.getFileManager().currentDirectoryPath.appending("/handson.plist")
+            if HandsOnUtilities.getFileManager().fileExists(atPath: plistPath) {
+                print("In there")
+                var plistData = NSMutableDictionary.init()
+                plistData.setValue(HandsOnUtilities.tomcatIpAdd, forKey: "server_ip")
+                plistData.write(toFile: plistPath, atomically: true)
+            }
         }
         else {
             statusLabel.stringValue = "Could not connect to server"

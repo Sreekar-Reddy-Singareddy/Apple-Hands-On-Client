@@ -41,7 +41,7 @@ public class HandsOnUtils {
     public static String INVALID = "INVALID";
     
     // File related variables
-    public static String BASE_PATH = "/Users/bros/Desktop/";
+    public static String BASE_PATH = "/Users/sv/Desktop/";
     public static String TRAINEES_LIST_PATH = "trainees.txt";
     public static String QPR_FILE = "QPR";
     public static String INS_FILE = "INS";
@@ -50,8 +50,8 @@ public class HandsOnUtils {
     // MySQL credentials
     private static String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static String MYSQL_HOST = "127.0.0.1:3306";
-    private static String MYSQL_USER = "sreekar";
-    private static String MYSQL_PASS = "sreekar2019";
+    private static String MYSQL_USER = "hands_on";
+    private static String MYSQL_PASS = "handsonnew";
     private static String MYSQL_DB_NAME = "sreekar_db";
     private static String MYSQL_BASE_PATH = "jdbc:mysql://" + MYSQL_HOST + "/" + MYSQL_DB_NAME;
     

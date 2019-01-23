@@ -116,7 +116,7 @@ class SubmitController: NSViewController, NSTextFieldDelegate, ServerProtocol {
             server.connection.start()
             
             // Alert the user about the submission
-            var code = AppDelegate.appDelegate.showAlert(msg: "Uploaded Success", info: "\(self.fileName!) was uploaded successfully. You can now quit the application", but1: "Quit", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
+            var code = AppDelegate.appDelegate.showAlert(msg: "Uploaded Successfully", info: "\(self.fileName!) was uploaded successfully. You can now quit the application", but1: "Quit", but2: nil, icon: NSImage.init(named: NSImage.Name("success")))
             if code == NSApplication.ModalResponse.alertFirstButtonReturn.rawValue {
                 // Quit the application
                 print("Quitting...")

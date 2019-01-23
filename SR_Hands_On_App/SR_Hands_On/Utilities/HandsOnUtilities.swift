@@ -10,7 +10,7 @@ import Foundation
 
 class HandsOnUtilities: NSObject {
     
-    public static var tomcatIpAdd = "192.168.43.103"
+    public static var tomcatIpAdd = "10.123.74.96"
     public static var tomcatPort = "8080"
     public static var tomcatLocation = "http://\(tomcatIpAdd):\(tomcatPort)/srhandson/"
     
